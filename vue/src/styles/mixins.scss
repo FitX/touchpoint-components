@@ -1,0 +1,79 @@
+@mixin list-unstyled() {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+@mixin btn-reset() {
+  border: none;
+
+  /**
+   * Change the font styles in all browsers.
+   */
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+
+  /**
+   * Remove the margin in Firefox and Safari.
+   */
+  margin: 0;
+
+  /**
+   * Show the overflow in IE and Edge.
+   */
+  overflow: visible;
+
+  /**
+   * Remove the inheritance of text transform in Edge, Firefox, and IE.
+   */
+  text-transform: none;
+
+  /**
+   * Correct the inability to style clickable types in iOS and Safari.
+   */
+  -webkit-appearance: button;
+}
+
+@mixin feature-list() {
+  @include list-unstyled();
+
+  --icon-width: 1.875rem; // 30px
+  --icon-height: 1.313rem; // 21px
+
+  font-size: var(--font-size-small);
+  color: var(--color-text);
+}
+
+@mixin feature-list-item() {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: calc(var(--icon-width) + 1em);
+
+  &::before {
+    content: '';
+    background: url('/img/icon-ok.svg') 0 0 no-repeat;
+    width: var(--icon-width);
+    height: var(--icon-height);
+    position: absolute;
+    left: 0;
+    top: 3px;
+  }
+}
+
+@mixin external-content() {
+  ul {
+    @include feature-list();
+
+    li {
+      @include feature-list-item();
+    }
+  }
+
+  p {
+    font-size: var(--font-size-normal);
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+}

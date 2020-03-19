@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 62">
+    <g transform="translate(2 2)" fill="none" fill-rule="evenodd" opacity=".75">
+        <circle stroke="var(--vote-color, #fff)" stroke-width="3" cx="29" cy="29" r="29"/>
+        <circle fill="var(--vote-color, #fff)" cx="18.125" cy="22.958" r="3.625"/>
+        <circle fill="var(--vote-color, #fff)" cx="39.875" cy="22.958" r="3.625"/>
+        <path d="M18.125 40.194h21.75a1.813 1.813 0 000-3.625h-21.75a1.813 1.813 0 000 3.625z" fill="var(--vote-color, #fff)" fill-rule="nonzero"/>
+    </g>
+</svg>
