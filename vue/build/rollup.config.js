@@ -2,12 +2,15 @@
 import fs from 'fs';
 import path from 'path';
 import vue from 'rollup-plugin-vue';
+// import vueSvg from 'rollup-plugin-vue-svg';
 import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
+
+const vueSvg = require('rollup-plugin-vue-svg');
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs.readFileSync('./.browserslistrc')
@@ -76,6 +79,7 @@ if (!argv.format || argv.format === 'es') {
     plugins: [
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
+      vueSvg(),
       babel({
         ...baseConfig.plugins.babel,
         presets: [
@@ -114,6 +118,7 @@ if (!argv.format || argv.format === 'cjs') {
           optimizeSSR: true,
         },
       }),
+      vueSvg(),
       babel(baseConfig.plugins.babel),
       commonjs(),
     ],
@@ -136,6 +141,7 @@ if (!argv.format || argv.format === 'iife') {
     plugins: [
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
+      vueSvg(),
       babel(baseConfig.plugins.babel),
       commonjs(),
       terser({

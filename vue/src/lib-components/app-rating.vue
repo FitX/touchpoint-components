@@ -33,6 +33,11 @@
 
 <script>
 import AnimationSatellite from './animation-satellite.vue';
+import IconVote1 from '../img/icon-vote-1.svg';
+import IconVote2 from '../img/icon-vote-2.svg';
+import IconVote3 from '../img/icon-vote-3.svg';
+import IconVote4 from '../img/icon-vote-4.svg';
+import IconVote5 from '../img/icon-vote-5.svg';
 
 /**
  * Filter Even Elements
@@ -45,6 +50,11 @@ export default {
   name: 'AppRating',
   components: {
     AnimationSatellite,
+    IconVote1,
+    IconVote2,
+    IconVote3,
+    IconVote4,
+    IconVote5,
   },
   props: {
     name: {
@@ -129,7 +139,8 @@ export default {
       // Runs 5 times, with values of step 0 through 4.
       components[count] = {
         index: countNumber,
-        component: () => import(`../img/icon-vote-${countNumber}.svg`),
+        // component: () => import(`@/img/icon-vote-${countNumber}.svg`),
+        component: `IconVote${countNumber}`,
       };
     }
     if (this.numberOfVotings === 5) {
@@ -159,10 +170,6 @@ export default {
 @import '../styles/colors.scss';
 
 .rating {
-  --color-green: var(--color-green, $color-green);
-  --color-cherry: var(--color-cherry, $color-cherry);
-  --color-curry: var(--color-curry, $color-curry);
-
   display: grid;
   grid-gap: 1em;
   align-items: center;
@@ -201,13 +208,13 @@ export default {
 
   &.animation,
   &:focus {
-    --vote-color: var(--color-green);
+    --vote-color: var(--color-green, #{$color-green});
   }
 
   &--1 {
     &.animation,
     &:focus {
-      --vote-color: var(--color-cherry);
+      --vote-color: var(--color-cherry, #{$color-cherry});
     }
   }
 
@@ -215,7 +222,7 @@ export default {
   &--3 {
     &.animation,
     &:focus {
-      --vote-color: var(--color-curry);
+      --vote-color: var(--color-curry, #{$color-curry});
     }
   }
 }
