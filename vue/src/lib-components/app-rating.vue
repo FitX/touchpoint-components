@@ -181,6 +181,7 @@ export default {
 
   &--block {
     grid-template-columns: 1fr;
+    grid-row-gap: 0;
   }
 
   &__buttons {
