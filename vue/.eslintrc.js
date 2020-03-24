@@ -16,8 +16,8 @@ module.exports = {
     // https://github.com/babel/babel-eslint/issues/681
     'template-curly-spacing': 'off',
     // https://github.com/babel/babel-eslint/issues/681
-    'indent': ['error', 2, {
-      'ignoredNodes': ['TemplateLiteral']
+    indent: ['error', 2, {
+      ignoredNodes: ['TemplateLiteral'],
     }],
   },
 };

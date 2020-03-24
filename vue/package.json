@@ -1,6 +1,6 @@
 {
   "name": "touchpoint-components-vue",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "Vue Components for FitX Gym Touchpoints",
   "scripts": {
     "serve": "vue-cli-service serve src/serve-dev.js",

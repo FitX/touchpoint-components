@@ -3,6 +3,7 @@ import Vue from 'vue';
 import {
   AnimationSatellite,
   AppRating,
+  AppOverlay,
 } from '@/entry';
 
 export default Vue.extend({
@@ -10,6 +11,7 @@ export default Vue.extend({
   components: {
     AnimationSatellite,
     AppRating,
+    AppOverlay,
   },
 });
 </script>
@@ -20,6 +22,7 @@ export default Vue.extend({
     <animation-satellite />
     <h2>App Rating</h2>
     <app-rating></app-rating>
+    <app-overlay :isVisible="true"></app-overlay>
   </div>
 </template>
 

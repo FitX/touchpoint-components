@@ -454,12 +454,174 @@ const __vue_component__$1 = normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$1
 }, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
 
+var IconClose = {
+        functional: true,
+        render: 
+      function render(_h, _vm) {
+        var _c=_vm._c;return _c('svg',{class:[_vm.data.class, _vm.data.staticClass],style:([_vm.data.style, _vm.data.staticStyle]),attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 48 48"}},[_c('path',{attrs:{"d":"M43.644.785L24 20.43 4.356.785a2.525 2.525 0 10-3.57 3.571L20.428 24 .785 43.644a2.525 2.525 0 003.571 3.57L24 27.572l19.644 19.644a2.525 2.525 0 103.57-3.571L27.572 24 47.215 4.356a2.525 2.525 0 00-3.571-3.57z","fill":"#FFF","fill-rule":"evenodd"}})])
+      }
+    
+      };
+
+//
+var script$2 = {
+  name: 'AppOverlay',
+  components: {
+    IconClose
+  },
+  props: {
+    headline: {
+      type: String,
+      default: null
+    },
+    isVisible: {
+      type: Boolean,
+      default: false
+    },
+    additionalStyles: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+
+  data() {
+    return {
+      showOverlay: this.isVisible,
+      defaultStyles: {
+        '--overlay-color-text': '#fff',
+        '--overlay-color-background': '#1a1a1a',
+        '--overlay-headline-size': '4rem',
+        '--overlay-close-size': '50px',
+        '--overlay-border-radius': '1em',
+        '--overlay-padding': '1em'
+      }
+    };
+  },
+
+  computed: {
+    cssVars() {
+      return { ...this.defaultStyles,
+        ...this.additionalStyles
+      };
+    }
+
+  },
+  methods: {
+    close() {
+      this.showOverlay = false;
+      this.$emit('close');
+    }
+
+  },
+  watch: {
+    isVisible(isOpen) {
+      if (isOpen) {
+        document.body.classList.add('overlay-open');
+      } else {
+        document.body.classList.remove('overlay-open');
+      }
+
+      this.showOverlay = isOpen;
+    }
+
+  }
+};
+
+/* script */
+const __vue_script__$2 = script$2;
+/* template */
+
+var __vue_render__$2 = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('transition', {
+    attrs: {
+      "name": "modal-fade"
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.showOverlay,
+      expression: "showOverlay"
+    }],
+    staticClass: "overlay",
+    style: _vm.cssVars
+  }, [_c('div', {
+    staticClass: "overlay__inner",
+    attrs: {
+      "role": "dialog",
+      "aria-labelledby": "modalTitle",
+      "aria-describedby": "modalDescription"
+    }
+  }, [_c('h1', {
+    staticClass: "overlay__headline",
+    attrs: {
+      "id": "modalTitle"
+    }
+  }, [_vm._v(_vm._s(_vm.headline))]), _vm._v(" "), _c('button', {
+    staticClass: "overlay__close",
+    attrs: {
+      "aria-label": "Overlay schliessen"
+    },
+    on: {
+      "click": _vm.close
+    }
+  }, [_c('icon-close', {
+    staticClass: "overlay__close-icon"
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "overlay__content",
+    attrs: {
+      "id": "modalDescription"
+    }
+  }, [_vm._t("default")], 2)])])]);
+};
+
+var __vue_staticRenderFns__$2 = [];
+/* style */
+
+const __vue_inject_styles__$2 = function (inject) {
+  if (!inject) return;
+  inject("data-v-772832f2_0", {
+    source: ".overlay-open{overflow:hidden}",
+    map: undefined,
+    media: undefined
+  }), inject("data-v-772832f2_1", {
+    source: ".modal-fade-enter[data-v-772832f2],.modal-fade-leave-active[data-v-772832f2]{opacity:0}.modal-fade-enter-active[data-v-772832f2],.modal-fade-leave-active[data-v-772832f2]{transition:opacity .5s ease}.overlay[data-v-772832f2]{display:flex;justify-content:center;align-items:center;position:fixed;width:100%;height:100%;top:0;left:0;background:rgba(0,0,0,.9);z-index:100}.overlay__inner[data-v-772832f2]{width:90vw;max-width:1930px;display:grid;grid:\". close\" auto \"headline headline\" auto \"content content\" auto/1fr auto;background:var(--overlay-color-background);border-radius:var(--overlay-border-radius);padding:var(--overlay-padding)}.overlay__content[data-v-772832f2]{grid-area:content}.overlay__headline[data-v-772832f2]{grid-area:headline;font-size:var(--overlay-headline-size);font-weight:700}.overlay__close[data-v-772832f2]{grid-area:close;background:0 0;border:0;appearance:none;color:var(--overlay-color-text);align-self:start;margin-bottom:2em}.overlay__close-icon[data-v-772832f2]{width:var(--overlay-close-size)}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+const __vue_scope_id__$2 = "data-v-772832f2";
+/* module identifier */
+
+const __vue_module_identifier__$2 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$2 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$2 = normalizeComponent({
+  render: __vue_render__$2,
+  staticRenderFns: __vue_staticRenderFns__$2
+}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, createInjector, undefined, undefined);
+
 /* eslint-disable import/prefer-default-export */
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,
   AnimationSatellite: __vue_component__,
-  AppRating: __vue_component__$1
+  AppRating: __vue_component__$1,
+  AppOverlay: __vue_component__$2
 });
 
 // Import vue components
@@ -493,4 +655,4 @@ if (GlobalVue) {
 } // Default export is library as a whole, registered via Vue.use()
 
 export default plugin;
-export { __vue_component__ as AnimationSatellite, __vue_component__$1 as AppRating };
+export { __vue_component__ as AnimationSatellite, __vue_component__$2 as AppOverlay, __vue_component__$1 as AppRating };
