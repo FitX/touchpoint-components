@@ -350,6 +350,7 @@ var script$1 = {
 
       components[count] = {
         index: countNumber,
+        title: this.getVoteTitles(count),
         // component: () => import(`@/img/icon-vote-${countNumber}.svg`),
         component: `IconVote${countNumber}`
       };
@@ -371,6 +372,11 @@ var script$1 = {
     saveVote(count) {
       this.vote = count;
       this.$emit('success', this.vote);
+    },
+
+    getVoteTitles(vote) {
+      const titles = ['nicht so gut', 'naja', 'ok', 'gut', 'sehr gut'];
+      return titles[vote];
     }
 
   }
@@ -406,7 +412,8 @@ var __vue_render__$1 = function () {
         'animation': _vm.vote === icon.index
       }, "vote--" + icon.index],
       attrs: {
-        "disabled": _vm.isVoted
+        "disabled": _vm.isVoted,
+        "aria-label": "Bewerte mit " + icon.title
       },
       on: {
         "click": function ($event) {
@@ -429,8 +436,8 @@ var __vue_staticRenderFns__$1 = [];
 
 const __vue_inject_styles__$1 = function (inject) {
   if (!inject) return;
-  inject("data-v-2cae3360_0", {
-    source: ".rating[data-v-2cae3360]{display:grid;grid-gap:1em;align-items:center;font-size:var(--voting-font-size)}@media (min-width:600px){.rating[data-v-2cae3360]{grid-template-columns:auto 1fr}}.rating--block[data-v-2cae3360]{grid-template-columns:1fr;grid-row-gap:0}.rating__buttons[data-v-2cae3360]{display:grid;grid-template-columns:repeat(var(--voting-icon-count),3.625rem);grid-gap:1em}.vote[data-v-2cae3360]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;position:relative;background:0 0;display:inline-block;outline:0}.vote.animation[data-v-2cae3360]{animation:icon-animation-data-v-2cae3360 cubic-bezier(.165,.84,.44,1) 1.2s}.vote.animation[data-v-2cae3360],.vote[data-v-2cae3360]:focus{--vote-color:var(--color-green, #00BAA7)}.vote--1.animation[data-v-2cae3360],.vote--1[data-v-2cae3360]:focus{--vote-color:var(--color-cherry, #C33546)}.vote--2.animation[data-v-2cae3360],.vote--2[data-v-2cae3360]:focus,.vote--3.animation[data-v-2cae3360],.vote--3[data-v-2cae3360]:focus{--vote-color:var(--color-curry, #F5A323)}@keyframes icon-animation-data-v-2cae3360{0%{transform:scale(0)}100%{transform:scale(1)}}",
+  inject("data-v-49ecdc8f_0", {
+    source: ".rating[data-v-49ecdc8f]{display:grid;grid-gap:1em;align-items:center;font-size:var(--voting-font-size)}@media (min-width:600px){.rating[data-v-49ecdc8f]{grid-template-columns:auto 1fr}}.rating--block[data-v-49ecdc8f]{grid-template-columns:1fr;grid-row-gap:0}.rating__buttons[data-v-49ecdc8f]{display:grid;grid-template-columns:repeat(var(--voting-icon-count),3.625rem);grid-gap:1em}.vote[data-v-49ecdc8f]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;position:relative;background:0 0;display:inline-block;outline:0}.vote.animation[data-v-49ecdc8f]{animation:icon-animation-data-v-49ecdc8f cubic-bezier(.165,.84,.44,1) 1.2s}.vote.animation[data-v-49ecdc8f],.vote[data-v-49ecdc8f]:focus{--vote-color:var(--color-green, #00BAA7)}.vote--1.animation[data-v-49ecdc8f],.vote--1[data-v-49ecdc8f]:focus{--vote-color:var(--color-cherry, #C33546)}.vote--2.animation[data-v-49ecdc8f],.vote--2[data-v-49ecdc8f]:focus,.vote--3.animation[data-v-49ecdc8f],.vote--3[data-v-49ecdc8f]:focus{--vote-color:var(--color-curry, #F5A323)}@keyframes icon-animation-data-v-49ecdc8f{0%{transform:scale(0)}100%{transform:scale(1)}}",
     map: undefined,
     media: undefined
   });
@@ -438,7 +445,7 @@ const __vue_inject_styles__$1 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$1 = "data-v-2cae3360";
+const __vue_scope_id__$1 = "data-v-49ecdc8f";
 /* module identifier */
 
 const __vue_module_identifier__$1 = undefined;
@@ -615,7 +622,7 @@ const __vue_component__$2 = normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$2
 }, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, createInjector, undefined, undefined);
 
-/* eslint-disable import/prefer-default-export */
+
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,

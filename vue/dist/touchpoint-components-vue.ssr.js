@@ -408,6 +408,7 @@ var script$1 = {
 
       components[count] = {
         index: countNumber,
+        title: this.getVoteTitles(count),
         // component: () => import(`@/img/icon-vote-${countNumber}.svg`),
         component: "IconVote".concat(countNumber)
       };
@@ -428,6 +429,10 @@ var script$1 = {
     saveVote: function saveVote(count) {
       this.vote = count;
       this.$emit('success', this.vote);
+    },
+    getVoteTitles: function getVoteTitles(vote) {
+      var titles = ['nicht so gut', 'naja', 'ok', 'gut', 'sehr gut'];
+      return titles[vote];
     }
   }
 };/* script */
@@ -448,7 +453,7 @@ var __vue_render__$1 = function __vue_render__() {
   }, [_vm._ssrNode((_vm.description ? "<p class=\"rating__description\">" + _vm._ssrEscape(_vm._s(_vm.description)) + "</p>" : "<!---->") + " "), _vm.components ? _vm._ssrNode("<div class=\"rating__buttons\"" + _vm._ssrStyle(null, {
     '--voting-icon-count': _vm.numberOfVotings
   }, null) + ">", "</div>", _vm._l(_vm.components, function (icon) {
-    return _vm._ssrNode("<button" + _vm._ssrAttr("disabled", _vm.isVoted) + _vm._ssrClass("vote vote--up", [{
+    return _vm._ssrNode("<button" + _vm._ssrAttr("disabled", _vm.isVoted) + _vm._ssrAttr("aria-label", "Bewerte mit " + icon.title) + _vm._ssrClass("vote vote--up", [{
       'animation': _vm.vote === icon.index
     }, "vote--" + icon.index]) + ">", "</button>", [_c(icon.component, {
       tag: "component",
@@ -466,8 +471,8 @@ var __vue_staticRenderFns__$1 = [];
 
 var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-2cae3360_0", {
-    source: ".rating[data-v-2cae3360]{display:grid;grid-gap:1em;align-items:center;font-size:var(--voting-font-size)}@media (min-width:600px){.rating[data-v-2cae3360]{grid-template-columns:auto 1fr}}.rating--block[data-v-2cae3360]{grid-template-columns:1fr;grid-row-gap:0}.rating__buttons[data-v-2cae3360]{display:grid;grid-template-columns:repeat(var(--voting-icon-count),3.625rem);grid-gap:1em}.vote[data-v-2cae3360]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;position:relative;background:0 0;display:inline-block;outline:0}.vote.animation[data-v-2cae3360]{animation:icon-animation-data-v-2cae3360 cubic-bezier(.165,.84,.44,1) 1.2s}.vote.animation[data-v-2cae3360],.vote[data-v-2cae3360]:focus{--vote-color:var(--color-green, #00BAA7)}.vote--1.animation[data-v-2cae3360],.vote--1[data-v-2cae3360]:focus{--vote-color:var(--color-cherry, #C33546)}.vote--2.animation[data-v-2cae3360],.vote--2[data-v-2cae3360]:focus,.vote--3.animation[data-v-2cae3360],.vote--3[data-v-2cae3360]:focus{--vote-color:var(--color-curry, #F5A323)}@keyframes icon-animation-data-v-2cae3360{0%{transform:scale(0)}100%{transform:scale(1)}}",
+  inject("data-v-49ecdc8f_0", {
+    source: ".rating[data-v-49ecdc8f]{display:grid;grid-gap:1em;align-items:center;font-size:var(--voting-font-size)}@media (min-width:600px){.rating[data-v-49ecdc8f]{grid-template-columns:auto 1fr}}.rating--block[data-v-49ecdc8f]{grid-template-columns:1fr;grid-row-gap:0}.rating__buttons[data-v-49ecdc8f]{display:grid;grid-template-columns:repeat(var(--voting-icon-count),3.625rem);grid-gap:1em}.vote[data-v-49ecdc8f]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;position:relative;background:0 0;display:inline-block;outline:0}.vote.animation[data-v-49ecdc8f]{animation:icon-animation-data-v-49ecdc8f cubic-bezier(.165,.84,.44,1) 1.2s}.vote.animation[data-v-49ecdc8f],.vote[data-v-49ecdc8f]:focus{--vote-color:var(--color-green, #00BAA7)}.vote--1.animation[data-v-49ecdc8f],.vote--1[data-v-49ecdc8f]:focus{--vote-color:var(--color-cherry, #C33546)}.vote--2.animation[data-v-49ecdc8f],.vote--2[data-v-49ecdc8f]:focus,.vote--3.animation[data-v-49ecdc8f],.vote--3[data-v-49ecdc8f]:focus{--vote-color:var(--color-curry, #F5A323)}@keyframes icon-animation-data-v-49ecdc8f{0%{transform:scale(0)}100%{transform:scale(1)}}",
     map: undefined,
     media: undefined
   });
@@ -475,10 +480,10 @@ var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$1 = "data-v-2cae3360";
+var __vue_scope_id__$1 = "data-v-49ecdc8f";
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-2cae3360";
+var __vue_module_identifier__$1 = "data-v-49ecdc8f";
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
@@ -634,7 +639,7 @@ var __vue_is_functional_template__$2 = false;
 var __vue_component__$2 = normalizeComponent({
   render: __vue_render__$2,
   staticRenderFns: __vue_staticRenderFns__$2
-}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,AnimationSatellite: __vue_component__,AppRating: __vue_component__$1,AppOverlay: __vue_component__$2});var install = function installTouchpointComponentsVue(Vue) {
+}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, createInjectorSSR, undefined);var components=/*#__PURE__*/Object.freeze({__proto__:null,AnimationSatellite: __vue_component__,AppRating: __vue_component__$1,AppOverlay: __vue_component__$2});var install = function installTouchpointComponentsVue(Vue) {
   if (install.installed) return;
   install.installed = true;
   Object.entries(components).forEach(function (_ref) {

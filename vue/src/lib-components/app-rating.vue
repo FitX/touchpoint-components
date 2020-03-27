@@ -17,6 +17,7 @@
       :class="[{ 'animation' : vote === icon.index }, `vote--${icon.index}`]"
       :disabled="isVoted"
       class="vote vote--up"
+      :aria-label="`Bewerte mit ${icon.title}`"
       @click="saveVote(icon.index)">
       <component
         :is="icon.component"
@@ -139,6 +140,7 @@ export default {
       // Runs 5 times, with values of step 0 through 4.
       components[count] = {
         index: countNumber,
+        title: this.getVoteTitles(count),
         // component: () => import(`@/img/icon-vote-${countNumber}.svg`),
         component: `IconVote${countNumber}`,
       };
@@ -158,6 +160,16 @@ export default {
     saveVote(count) {
       this.vote = count;
       this.$emit('success', this.vote);
+    },
+    getVoteTitles(vote) {
+      const titles = [
+        'nicht so gut',
+        'naja',
+        'ok',
+        'gut',
+        'sehr gut',
+      ];
+      return titles[vote];
     },
   },
 };
