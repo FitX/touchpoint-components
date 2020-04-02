@@ -1,31 +1,44 @@
 <template>
   <div id="app">
-    <h1>Farben</h1>
-    <s-g-colors></s-g-colors>
-    <ul
-      class="sg-colors">
-      <li
-        class="sg-colors__item"
-        :style="{ background: declaration.value }"
-        v-for="(declaration, index) in colors"
-        :key="index">
-        {{ declaration.name }}
-      </li>
-    </ul>
     <s-g-usage
-      headline="Animation Satellite">
+      headline="Farben">
+      <s-g-colors></s-g-colors>
+    </s-g-usage>
+
+    <s-g-usage>
       <animation-satellite />
     </s-g-usage>
 
     <s-g-usage
-      headline="App Rating"
-      :is-inverted="true">
+      headline="Standard"
+      :inverted="true">
       <app-rating></app-rating>
     </s-g-usage>
 
     <s-g-usage
-      headline="App Overlay">
-      <app-overlay :isVisible="false"></app-overlay>
+      headline="Gut / Schlecht und modifier: Block"
+      :inverted="true">
+      <app-rating
+        description="Mit einer Beschreibung"
+        modifier="block"
+        :numberOfVotings="2"></app-rating>
+    </s-g-usage>
+
+    <s-g-usage
+      headline="3 Möglichkeiten mit Beschreibung"
+      :inverted="true">
+      <app-rating
+        description="Mit einer Beschreibung"
+        :numberOfVotings="3"></app-rating>
+    </s-g-usage>
+
+    <s-g-usage>
+      <app-overlay
+        headline="optionale Überschrift"
+        :isVisible="showModal">
+        <p>Whats up?</p>
+      </app-overlay>
+      <button @click="showModal = !showModal">Zeige Modal</button>
     </s-g-usage>
 
   </div>
@@ -38,16 +51,6 @@ import {
   AppRating,
   AppOverlay,
 } from '@/entry';
-import colors from '!raw-loader!@/styles/colors.scss';
-
-const getColorDefinitionsFromString = (string = colors, separator = ';') => string
-  // replace whitespace
-  .replace(/\s/g, '')
-  // replace line breaks
-  .replace(/(?:\r\n|\r|\n)/g, '')
-  .split(separator)
-  // remove empty
-  .filter((notEmpty) => notEmpty);
 
 export default Vue.extend({
   name: 'ServeDev',
@@ -60,21 +63,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      headline: 'gg',
+      showModal: false,
     };
-  },
-  computed: {
-    colors() {
-      return [...getColorDefinitionsFromString()]
-        // get declaration array from string
-        .map((declaration) => getColorDefinitionsFromString(declaration, ':'))
-        // convert array to object
-        // .map((declarationArray) => ({ ...declarationArray }));
-        .map((declarationArray) => ({
-          name: declarationArray[0],
-          value: declarationArray[1],
-        }));
-    },
   },
 });
 </script>
@@ -82,5 +72,7 @@ export default Vue.extend({
 <style scoped>
 #app {
   color: black;
+  font-family: 'Niveau Grotesk',
+  'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;;
 }
 </style>

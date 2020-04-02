@@ -3,7 +3,9 @@
   :class="[{ 'sg-usage--inverted' : isInverted }]"
   class="sg-usage">
   <header class="sg-usage__header">
-    <h1 class="sg-usage__headline">{{ componentName }} - {{ headline }}</h1>
+    <h1 class="sg-usage__headline">
+      {{ componentName }}
+      <span v-if="headline">- {{ headline }}</span></h1>
     <button
       class="sg-usage__toggle-inverted"
       @click="toggleInverted">
@@ -29,7 +31,7 @@ export default {
       type: String,
       default: null,
     },
-    isInverted: {
+    inverted: {
       type: Boolean,
       default: false,
     },
@@ -38,6 +40,11 @@ export default {
     componentName() {
       return this.$slots?.default[0]?.componentOptions?.tag;
     },
+  },
+  data() {
+    return {
+      isInverted: this.inverted,
+    };
   },
   methods: {
     toggleInverted() {
@@ -59,7 +66,7 @@ export default {
   }
 
   padding: var(--spacing);
-  margin-bottom: var(--spacing);
+  margin-bottom: calc(4 * var(--spacing));
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
 
   &__header {
@@ -76,6 +83,9 @@ export default {
       radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
     background-color:#282828;
     background-size:16px 16px;
+
+    position: sticky;
+    top: 0;
   }
 
   &__toggle-inverted {
