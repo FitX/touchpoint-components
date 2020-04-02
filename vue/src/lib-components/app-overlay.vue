@@ -79,12 +79,14 @@ export default {
     },
   },
   watch: {
-    isVisible(isOpen) {
+    showOverlay(isOpen) {
       if (isOpen) {
         document.body.classList.add('overlay-open');
       } else {
         document.body.classList.remove('overlay-open');
       }
+    },
+    isVisible(isOpen) {
       this.showOverlay = isOpen;
     },
   },
