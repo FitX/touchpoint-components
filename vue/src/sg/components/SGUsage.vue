@@ -55,6 +55,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins.scss';
+
 .sg-usage {
   --color-background: #fff;
   --color-text: #000;
@@ -89,7 +91,13 @@ export default {
   }
 
   &__toggle-inverted {
+    @include btn-reset();
+
     color: #fff;
+    padding: 0.25rem 1rem;
+    margin: 0.25rem 1rem;
+    align-self: center;
+    background: black;
   }
 
   &__component {
