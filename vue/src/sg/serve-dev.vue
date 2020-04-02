@@ -12,11 +12,22 @@
         {{ declaration.name }}
       </li>
     </ul>
-    <h2>Animation Satellite</h2>
-    <animation-satellite />
-    <h2>App Rating</h2>
-    <app-rating></app-rating>
-    <app-overlay :isVisible="true"></app-overlay>
+    <s-g-usage
+      headline="Animation Satellite">
+      <animation-satellite />
+    </s-g-usage>
+
+    <s-g-usage
+      headline="App Rating"
+      :is-inverted="true">
+      <app-rating></app-rating>
+    </s-g-usage>
+
+    <s-g-usage
+      headline="App Overlay">
+      <app-overlay :isVisible="false"></app-overlay>
+    </s-g-usage>
+
   </div>
 </template>
 
@@ -45,6 +56,7 @@ export default Vue.extend({
     AppRating,
     AppOverlay,
     SGColors: () => import('./components/SGColors.vue'),
+    SGUsage: () => import('./components/SGUsage.vue'),
   },
   data() {
     return {
