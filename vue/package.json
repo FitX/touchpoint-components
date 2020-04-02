@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "description": "Vue Components for FitX Gym Touchpoints",
   "scripts": {
-    "serve": "vue-cli-service serve src/serve-dev.js",
+    "serve": "vue-cli-service serve src/sg/serve-dev.js",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "lint": "vue-cli-service lint",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
@@ -19,7 +19,7 @@
     "src/**/*.vue",
     "src/styles/*.scss",
     "src/img/*",
-    "!src/serve-dev.*"
+    "!src/sg/*"
   ],
   "dependencies": {},
   "devDependencies": {
@@ -39,6 +39,7 @@
     "eslint-plugin-vue": "^6.1.2",
     "minimist": "^1.2.0",
     "node-sass": "^4.13.1",
+    "raw-loader": "^4.0.0",
     "rollup": "^1.27.13",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-terser": "^5.1.3",

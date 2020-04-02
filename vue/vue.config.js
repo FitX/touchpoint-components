@@ -16,5 +16,13 @@ module.exports = {
     svgRule
       .use('vue-svg-loader')
       .loader('vue-svg-loader');
+
+    /* config.module
+      .rule('raw')
+      .test(/\.scss$/)
+      // .test(/\colors.scss$/)
+      .use('raw-loader')
+      .loader('raw-loader')
+      .end(); */
   },
 };
