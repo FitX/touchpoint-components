@@ -1,19 +1,11 @@
 <template>
   <div id="detail">
     <header>
-      <a @click="$router.go(-1)">⬅️ zurück</a>
-      <nav>
-        <ul>
-          <li
-            v-for="(nav, index) in navigation"
-            :key="index">
-            {{ nav.navName }} {{ nav.__file }}
-          </li>
-        </ul>
-      </nav>
+      <s-g-nav></s-g-nav>
     </header>
     <component
       :is="detailComponent"
+      :key="name"
       class="rating__icon"
     ></component>
   </div>
@@ -22,23 +14,41 @@
 <script>
 export default {
   name: 'Detail',
-  components: {},
+  components: {
+    SGNav: () => import('@/sg/components/SGNav.vue'),
+  },
   data() {
     return {
+      // name: this.$route.params.component,
       detailComponent: {},
     };
   },
   computed: {
-    navigation() {
-      const components = require.context('@/sg/documentation/', false, /.vue$/);
-      return components.keys().map((x) => components(x).default);
+    /* detailComponent() {
+      return () => this.importComponent(this.name);
+    }, */
+    name() {
+      return this.$route.params.component;
     },
   },
   created() {
-    this.detailComponent = () => import(`@/sg/documentation/${this.$route.params.component}.vue`)
-      .then((m) => m.default)
-      // .catch((err) => import ('404_component_does_not_exist'));
-      .catch(() => this.$router.push('/'));
+    this.changeComponent();
+  },
+  watch: {
+    name() {
+      this.changeComponent();
+    },
+  },
+  methods: {
+    importComponent(name = this.name) {
+      return import(`@/sg/documentation/${name}.vue`)
+        .then((m) => m.default)
+        // .catch((err) => import ('404_component_does_not_exist'));
+        .catch(() => this.$router.push('/'));
+    },
+    changeComponent() {
+      this.detailComponent = () => this.importComponent();
+    },
   },
 };
 </script>
