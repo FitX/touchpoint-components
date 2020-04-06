@@ -1,12 +1,10 @@
 <template>
-  <div id="detail">
-    <header>
-      <s-g-nav></s-g-nav>
-    </header>
+  <div class="detail">
+    <s-g-nav></s-g-nav>
     <component
       :is="detailComponent"
       :key="name"
-      class="rating__icon"
+      class="detail__content"
     ></component>
   </div>
 </template>
@@ -53,5 +51,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/styles/colors.scss';
+
+.detail {
+  display: grid;
+  grid: 'nav' auto
+        'content' 1fr / 1fr;
+  grid-gap: 2rem;
+
+  @media (min-width: 800px) {
+    grid: 'nav content' 1fr / 200px 1fr;
+  }
+}
 </style>

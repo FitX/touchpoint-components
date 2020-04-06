@@ -1,16 +1,18 @@
 <template>
-  <div id="detail">
+  <main>
+    <header>
+      <s-g-nav :backlink="false"></s-g-nav>
+    </header>
     <h1>Styleguide</h1>
-    <nav>
-      <router-link
-        :to="{ name: 'detail', params: { component: 'app-rating' } }">App Rating</router-link>
-    </nav>
-  </div>
+  </main>
 </template>
 
 <script>
 export default {
   name: 'Home',
+  components: {
+    SGNav: () => import('@/sg/components/SGNav.vue'),
+  },
 };
 </script>
 

@@ -1,12 +1,18 @@
 <template>
-<nav>
-  <ul>
-    <li><a @click="$router.go(-1)">⬅️ zurück</a></li>
+<nav class="nav">
+  <ul class="nav-list">
+    <li
+      class="nav__item"
+      v-if="backlink"><a @click="$router.push('/')">🏠 Übersicht</a></li>
+    <!-- <li
+      class="nav__item"
+      v-if="backlink"><a @click="$router.go(-1)">⬅️ zurück</a></li> -->
     <router-link
       tag="li"
+      class="nav__item"
       v-for="(nav, index) in navigation"
       :key="index"
-      :to="{ path: transformUrl(nav.navName) }" >
+      :to="{ name: 'detail', params: { component: transformUrl(nav.navName) } }" >
       {{ nav.navName }}
     </router-link>
   </ul>
@@ -21,6 +27,12 @@ const camelToKebabCase = (str) => str
 
 export default {
   name: 'SGNav',
+  props: {
+    backlink: {
+      type: Boolean,
+      default: true,
+    },
+  },
   computed: {
     navigation() {
       const components = require.context('@/sg/documentation/', false, /.vue$/);
@@ -37,8 +49,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/mixins.scss';
+@import '@/styles/colors.scss';
 
-.sg-usage {
+.nav {
   --color-background: #fff;
   --color-text: #000;
   --spacing: 1rem;
@@ -48,42 +61,18 @@ export default {
     --color-text: #fff;
   }
 
-  padding: var(--spacing);
-  margin-bottom: calc(4 * var(--spacing));
-  box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
-
-  &__header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    margin: calc(var(--spacing) * -1) calc(var(--spacing) * -1) 0;
-    padding-left: var(--spacing);
-    color: #fff;
-
-    background:
-      radial-gradient(black 15%, transparent 16%) 0 0,
-      radial-gradient(black 15%, transparent 16%) 8px 8px,
-      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-    background-color:#282828;
-    background-size:16px 16px;
-
-    position: sticky;
-    top: 0;
+  &-list {
+    @include list-unstyled();
   }
 
-  &__toggle-inverted {
-    @include btn-reset();
+  &__item {
+    padding: 1em;
+    color: $color-ash;
 
-    color: #fff;
-    padding: 0.25rem 1rem;
-    margin: 0.25rem 1rem;
-    align-self: center;
-    background: black;
-  }
-
-  &__component {
-    background: var(--color-background);
-    color: var(--color-text);
+    &:hover {
+      background: rgba($color-silver, 0.25);
+      cursor: pointer;
+    }
   }
 }
 </style>
