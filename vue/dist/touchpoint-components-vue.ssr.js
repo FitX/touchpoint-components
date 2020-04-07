@@ -640,7 +640,202 @@ var __vue_is_functional_template__$2 = false;
 var __vue_component__$2 = normalizeComponent({
   render: __vue_render__$2,
   staticRenderFns: __vue_staticRenderFns__$2
-}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, createInjectorSSR, undefined);var components=/*#__PURE__*/Object.freeze({__proto__:null,AnimationSatellite: __vue_component__,AppRating: __vue_component__$1,AppOverlay: __vue_component__$2});var install = function installTouchpointComponentsVue(Vue) {
+}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, createInjectorSSR, undefined);//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/**
+ * Add one or more listeners to an element
+ * @param {Element|object} element - DOM element to add listeners to
+ * @param {string} eventNames - space separated list of event names, e.g. 'click change'
+ * @param {Function} listener - function to attach for each event as a listener
+ * @Link
+ * http://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery
+ */
+function addListenerMulti(element, eventNames, listener) {
+  [].forEach.call(eventNames.split(' '), function (e) {
+    element.addEventListener(e, listener, true);
+  });
+}
+
+function removeListenerMulti(element, eventNames, listener) {
+  [].forEach.call(eventNames.split(' '), function (e) {
+    element.removeEventListener(e, listener, true);
+  });
+}
+
+var script$3 = {
+  name: 'RedirectTimer',
+  props: {
+    /**
+     * Countdown in Seconds
+     */
+    countdown: {
+      type: Number,
+      default: 1800
+    },
+    routerName: {
+      type: String,
+      default: null
+    },
+    url: {
+      type: String,
+      default: '/'
+    },
+    show: {
+      type: Boolean,
+      default: false
+    },
+    autoStart: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data: function data() {
+    return {
+      isRunning: false,
+      timer: null,
+      time: this.countdown
+    };
+  },
+  mounted: function mounted() {
+    this.stop();
+    this.timer = null;
+    addListenerMulti(window, 'keydown click scroll pauseRedirectTimer', this.eventHandling);
+
+    if (this.autoStart) {
+      this.start();
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.stop();
+    clearInterval(this.timer);
+  },
+  destroyed: function destroyed() {
+    removeListenerMulti(window, 'keydown click scroll pauseRedirectTimer', this.eventHandling);
+    this.$destroy();
+  },
+  methods: {
+    eventHandling: function eventHandling() {
+      if (this.timer) {
+        this.resume(true);
+      } else {
+        this.start();
+      }
+    },
+    start: function start() {
+      var _this = this;
+
+      this.isRunning = true;
+
+      if (!this.timer) {
+        this.timer = setInterval(function () {
+          if (_this.time > 0) {
+            _this.$root.$emit('countdown-tick', _this.time);
+
+            _this.time -= 1;
+          } else {
+            clearInterval(_this.timer);
+
+            _this.reset();
+          }
+        }, 1000);
+      }
+    },
+    resume: function resume() {
+      this.reset(true);
+      this.start();
+    },
+    stop: function stop() {
+      this.isRunning = false;
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+    reset: function reset() {
+      var initial = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      this.stop();
+
+      if (initial) {
+        this.time = this.countdown;
+      } else {
+        this.time = 0;
+
+        if (this.routerName) {
+          this.$emit('redirect', {
+            name: this.routerName
+          });
+
+          if (this.$route.name === this.routerName) {
+            this.$router.go(0);
+          } else {
+            this.$router.push({
+              name: this.routerName,
+              params: {
+                redirect: {
+                  name: this.routerName
+                }
+              }
+            });
+          }
+        } else {
+          this.$emit('redirect', {
+            url: this.url
+          });
+
+          if (this.$route.path === this.url) {
+            this.$router.go(0);
+          } else {
+            this.$router.push({
+              path: this.url
+            });
+          }
+        }
+      }
+    }
+  }
+};/* script */
+var __vue_script__$3 = script$3;
+/* template */
+
+var __vue_render__$3 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('div', [_vm._t("default"), _vm._ssrNode(" " + (_vm.show ? _vm._ssrEscape("\n  " + _vm._s(_vm.time) + "\n  ") : "<!---->"))], 2);
+};
+
+var __vue_staticRenderFns__$3 = [];
+/* style */
+
+var __vue_inject_styles__$3 = undefined;
+/* scoped */
+
+var __vue_scope_id__$3 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$3 = "data-v-03e0b524";
+/* functional template */
+
+var __vue_is_functional_template__$3 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$3 = normalizeComponent({
+  render: __vue_render__$3,
+  staticRenderFns: __vue_staticRenderFns__$3
+}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);var components=/*#__PURE__*/Object.freeze({__proto__:null,AnimationSatellite: __vue_component__,AppRating: __vue_component__$1,AppOverlay: __vue_component__$2,RedirectTimer: __vue_component__$3});var install = function installTouchpointComponentsVue(Vue) {
   if (install.installed) return;
   install.installed = true;
   Object.entries(components).forEach(function (_ref) {
@@ -671,4 +866,4 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
   GlobalVue.use(plugin);
 } // Default export is library as a whole, registered via Vue.use()
-exports.AnimationSatellite=__vue_component__;exports.AppOverlay=__vue_component__$2;exports.AppRating=__vue_component__$1;exports.default=plugin;
+exports.AnimationSatellite=__vue_component__;exports.AppOverlay=__vue_component__$2;exports.AppRating=__vue_component__$1;exports.RedirectTimer=__vue_component__$3;exports.default=plugin;

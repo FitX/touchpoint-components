@@ -22,8 +22,6 @@ export { default as AppButton } from './app-button.vue';
 
 ### Serve Components
 Serve Components via `npm run serve`.
-Make sure that the component is imported in
-`src/serve-dev.vue`
 
 ### Linting
 Lint Components via `npm run lint`.

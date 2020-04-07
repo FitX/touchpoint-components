@@ -624,13 +624,218 @@ const __vue_component__$2 = normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$2
 }, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, createInjector, undefined, undefined);
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/**
+ * Add one or more listeners to an element
+ * @param {Element|object} element - DOM element to add listeners to
+ * @param {string} eventNames - space separated list of event names, e.g. 'click change'
+ * @param {Function} listener - function to attach for each event as a listener
+ * @Link
+ * http://stackoverflow.com/questions/8796988/binding-multiple-events-to-a-listener-without-jquery
+ */
+function addListenerMulti(element, eventNames, listener) {
+  [].forEach.call(eventNames.split(' '), e => {
+    element.addEventListener(e, listener, true);
+  });
+}
+
+function removeListenerMulti(element, eventNames, listener) {
+  [].forEach.call(eventNames.split(' '), e => {
+    element.removeEventListener(e, listener, true);
+  });
+}
+
+var script$3 = {
+  name: 'RedirectTimer',
+  props: {
+    /**
+     * Countdown in Seconds
+     */
+    countdown: {
+      type: Number,
+      default: 1800
+    },
+    routerName: {
+      type: String,
+      default: null
+    },
+    url: {
+      type: String,
+      default: '/'
+    },
+    show: {
+      type: Boolean,
+      default: false
+    },
+    autoStart: {
+      type: Boolean,
+      default: true
+    }
+  },
+
+  data() {
+    return {
+      isRunning: false,
+      timer: null,
+      time: this.countdown
+    };
+  },
+
+  mounted() {
+    this.stop();
+    this.timer = null;
+    addListenerMulti(window, 'keydown click scroll pauseRedirectTimer', this.eventHandling);
+
+    if (this.autoStart) {
+      this.start();
+    }
+  },
+
+  beforeDestroy() {
+    this.stop();
+    clearInterval(this.timer);
+  },
+
+  destroyed() {
+    removeListenerMulti(window, 'keydown click scroll pauseRedirectTimer', this.eventHandling);
+    this.$destroy();
+  },
+
+  methods: {
+    eventHandling() {
+      if (this.timer) {
+        this.resume(true);
+      } else {
+        this.start();
+      }
+    },
+
+    start() {
+      this.isRunning = true;
+
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          if (this.time > 0) {
+            this.$root.$emit('countdown-tick', this.time);
+            this.time -= 1;
+          } else {
+            clearInterval(this.timer);
+            this.reset();
+          }
+        }, 1000);
+      }
+    },
+
+    resume() {
+      this.reset(true);
+      this.start();
+    },
+
+    stop() {
+      this.isRunning = false;
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+
+    reset(initial = false) {
+      this.stop();
+
+      if (initial) {
+        this.time = this.countdown;
+      } else {
+        this.time = 0;
+
+        if (this.routerName) {
+          this.$emit('redirect', {
+            name: this.routerName
+          });
+
+          if (this.$route.name === this.routerName) {
+            this.$router.go(0);
+          } else {
+            this.$router.push({
+              name: this.routerName,
+              params: {
+                redirect: {
+                  name: this.routerName
+                }
+              }
+            });
+          }
+        } else {
+          this.$emit('redirect', {
+            url: this.url
+          });
+
+          if (this.$route.path === this.url) {
+            this.$router.go(0);
+          } else {
+            this.$router.push({
+              path: this.url
+            });
+          }
+        }
+      }
+    }
+
+  }
+};
+
+/* script */
+const __vue_script__$3 = script$3;
+/* template */
+
+var __vue_render__$3 = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('div', [_vm._t("default"), _vm._v(" "), _vm.show ? [_vm._v("\n  " + _vm._s(_vm.time) + "\n  ")] : _vm._e()], 2);
+};
+
+var __vue_staticRenderFns__$3 = [];
+/* style */
+
+const __vue_inject_styles__$3 = undefined;
+/* scoped */
+
+const __vue_scope_id__$3 = undefined;
+/* module identifier */
+
+const __vue_module_identifier__$3 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$3 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$3 = normalizeComponent({
+  render: __vue_render__$3,
+  staticRenderFns: __vue_staticRenderFns__$3
+}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
+
 
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,
   AnimationSatellite: __vue_component__,
   AppRating: __vue_component__$1,
-  AppOverlay: __vue_component__$2
+  AppOverlay: __vue_component__$2,
+  RedirectTimer: __vue_component__$3
 });
 
 // Import vue components
@@ -664,4 +869,4 @@ if (GlobalVue) {
 } // Default export is library as a whole, registered via Vue.use()
 
 export default plugin;
-export { __vue_component__ as AnimationSatellite, __vue_component__$2 as AppOverlay, __vue_component__$1 as AppRating };
+export { __vue_component__ as AnimationSatellite, __vue_component__$2 as AppOverlay, __vue_component__$1 as AppRating, __vue_component__$3 as RedirectTimer };
