@@ -15,6 +15,11 @@
   <p>{{ description }}</p>
   <div class="sg-usage__component">
     <slot></slot>
+    <pre>{{ parsedSlot }}</pre>
+    <hr>
+    <pre>
+      {{ parsed.template }}
+    </pre>
   </div>
 </section>
 </template>
@@ -44,12 +49,69 @@ export default {
   data() {
     return {
       isInverted: this.inverted,
+      parsed: null,
+      parsedSlot: null,
     };
   },
   methods: {
+    parseSlot(slot) {
+      class Parsed {
+        constructor() {
+          this.textNodes = [];
+          this.tagNodes = [];
+        }
+      }
+      const r = new Parsed();
+      if (slot != null) {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const node of slot) {
+          (node.tag == null ? r.textNodes : r.tagNodes).push(node);
+        }
+      }
+      console.log('r', r);
+      return r;
+    },
     toggleInverted() {
       this.isInverted = !this.isInverted;
     },
+    boot(res) {
+      const template = this.parseTemplate('template', res);
+      this.parseComponent('app-rating', res);
+      const demo = this.parseTemplate('app-rating', template);
+      this.parsed = {
+        template: demo,
+        script: this.parseTemplate('script', res),
+        style: this.parseTemplate('style', res),
+      };
+    },
+    importTemplate() {
+      // `!raw-loader!@/lib-components/${this.componentName}.vue`
+      import(
+        /* webpackChunkName: "examples-source" */
+        /* webpackMode: "lazy-once" */
+        `!raw-loader!@/sg/documentation/${this.componentName}.vue`
+      ).then((comp) => this.boot(comp.default));
+      // .then(this.unobserve);
+    },
+    parseTemplate(target, template) {
+      const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`;
+      const regex = new RegExp(string, 'g');
+      const parsed = regex.exec(template) || [];
+      return parsed[1] || '';
+    },
+    parseComponent(target, template) {
+      const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`;
+      const regex = new RegExp(string, 'g');
+      const parsed = regex.exec(template) || [];
+      console.log('parsed 0', parsed[0]);
+      console.log('parsed 1', parsed[1]);
+      return parsed[1] || '';
+    },
+  },
+  mounted() {
+    this.importTemplate();
+    console.log(this.$slots.default);
+    this.parseSlot(this.$slots?.default);
   },
 };
 </script>
