@@ -4,14 +4,14 @@
   "description": "Vue Components for FitX Gym Touchpoints",
   "author": "FitX - Michael Gerstmann",
   "scripts": {
-    "serve": "vue-cli-service serve src/sg/main.js",
+    "serve": "vue-cli-service serve src/sg/main.js --port 8089",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "lint": "vue-cli-service lint",
     "build-sg": "vue-cli-service build --modern --dest ./styleguide src/sg/serve-dev.js",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
-    "test:e2e": "vue-cli-service test:e2e",
+    "test:e2e": "vue-cli-service test:e2e --url http://localhost:8089",
     "test:unit": "vue-cli-service test:unit"
   },
   "main": "dist/touchpoint-components-vue.ssr.js",
