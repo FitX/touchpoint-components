@@ -2,6 +2,8 @@ import Vue from 'vue';
 import { shallowMount } from '@vue/test-utils';
 import RedirectTimer from '@/lib-components/redirect-timer.vue';
 
+jest.useFakeTimers();
+
 describe('RedirectTimer.vue', () => {
   it('try fake timer', () => {
     const countdown = 40;
@@ -14,11 +16,14 @@ describe('RedirectTimer.vue', () => {
     expect(wrapper.vm.countdown).toBe(countdown);
     expect(wrapper.vm.time).toBe(countdown);
     wrapper.trigger('click');
-    jest.useFakeTimers();
 
-    jest.advanceTimersByTime(5000);
-    expect(wrapper.vm.time).toBe(35);
-    expect(wrapper.text()).toBe(35);
+    jest.runTimersToTime(3000);
+    Vue.nextTick(() => {
+      // you don't do your first reduction of the property until one second is elapsed, so after 3 seconds, timer will equal 8
+      // expect(RedirectTimer.data().time).toBe(8)
+      expect(wrapper.vm.time).toBe(37);
+      expect(wrapper.text()).toBe('37');
+    });
   });
 
   /* it('countdown works', done => {
