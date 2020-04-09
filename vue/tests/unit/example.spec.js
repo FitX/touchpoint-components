@@ -5,7 +5,7 @@ import RedirectTimer from '@/lib-components/redirect-timer.vue';
 jest.useFakeTimers();
 
 describe('RedirectTimer.vue', () => {
-  it('try fake timer', () => {
+  it('countdown works and is showing', () => {
     const countdown = 40;
     const wrapper = shallowMount(RedirectTimer, {
       propsData: {
@@ -15,7 +15,7 @@ describe('RedirectTimer.vue', () => {
     });
     expect(wrapper.vm.countdown).toBe(countdown);
     expect(wrapper.vm.time).toBe(countdown);
-    wrapper.trigger('click');
+    window.dispatchEvent(new Event('click'));
 
     jest.runTimersToTime(3000);
     Vue.nextTick(() => {
@@ -24,9 +24,39 @@ describe('RedirectTimer.vue', () => {
       expect(wrapper.vm.time).toBe(37);
       expect(wrapper.text()).toBe('37');
     });
+    jest.clearAllTimers();
   });
 
-  /* it('countdown works', done => {
+  it('autostart false works', () => {
+    const countdown = 40;
+    const wrapper = shallowMount(RedirectTimer, {
+      propsData: {
+        countdown,
+        autoStart: false,
+      }
+    });
+    // Test defaults
+    expect(wrapper.vm.countdown).toBe(countdown);
+    expect(wrapper.vm.time).toBe(countdown);
+    // run forward
+    jest.runTimersToTime(5000);
+    Vue.nextTick(() => {
+      // default, cause no auto-start
+      expect(wrapper.vm.countdown).toBe(countdown);
+      expect(wrapper.vm.time).toBe(countdown);
+
+      // trigger event
+      window.dispatchEvent(new Event('click'));
+      jest.runTimersToTime(5000);
+      Vue.nextTick(() => {
+        Vue.nextTick(() => {
+          expect(wrapper.vm.time).toBe(35);
+        });
+      });
+    });
+  });
+
+  it('timer reset works', () => {
     const countdown = 40;
     const wrapper = shallowMount(RedirectTimer, {
       propsData: {
@@ -34,11 +64,23 @@ describe('RedirectTimer.vue', () => {
         autoStart: true,
       }
     });
+    // Test defaults
     expect(wrapper.vm.countdown).toBe(countdown);
     expect(wrapper.vm.time).toBe(countdown);
-    setTimeout(() => {
-      expect(wrapper.vm.time).toBe(38);
-      done();
-    }, 1001);
-  }) */
+    // run forward
+    jest.runTimersToTime(5000);
+    Vue.nextTick(() => {
+      expect(wrapper.vm.time).toBe(35);
+
+      // trigger event
+      window.dispatchEvent(new Event('click'));
+      Vue.nextTick(() => {
+        Vue.nextTick(() => {
+          // default, cause event resets countdown
+          expect(wrapper.vm.time).toBe(countdown);
+        });
+      });
+    });
+  });
+
 });
