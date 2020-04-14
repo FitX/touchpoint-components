@@ -95,6 +95,7 @@ function _nonIterableRest() {
 //
 //
 //
+//
 var script = {
   name: 'ButtonCallToAction',
   props: {
@@ -105,6 +106,22 @@ var script = {
         var acceptedValues = ['small', 'full'];
         return acceptedValues.includes(value);
       }
+    },
+    additionalStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  data: function data() {
+    return {
+      defaultStyles: {}
+    };
+  },
+  computed: {
+    cssVars: function cssVars() {
+      return _objectSpread2({}, this.defaultStyles, {}, this.additionalStyles);
     }
   }
 };function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -233,7 +250,8 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('button', {
     staticClass: "btn",
-    class: [_vm.modifier ? "btn--" + _vm.modifier : null]
+    class: [_vm.modifier ? "btn--" + _vm.modifier : null],
+    style: _vm.cssVars
   }, [_vm._t("default")], 2);
 };
 
@@ -242,8 +260,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-68699ece_0", {
-    source: ".btn[data-v-68699ece]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-68699ece]{width:100%}.btn--small[data-v-68699ece]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}",
+  inject("data-v-ad11b350_0", {
+    source: ".btn[data-v-ad11b350]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-ad11b350]{width:100%}.btn--small[data-v-ad11b350]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}",
     map: undefined,
     media: undefined
   });
@@ -251,10 +269,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-68699ece";
+var __vue_scope_id__ = "data-v-ad11b350";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-68699ece";
+var __vue_module_identifier__ = "data-v-ad11b350";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
