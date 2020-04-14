@@ -12,7 +12,8 @@
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
     "test:e2e": "vue-cli-service test:e2e --url http://localhost:8089",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "generate-component": "cd .. && npm run generate-component"
   },
   "main": "dist/touchpoint-components-vue.ssr.js",
   "module": "dist/touchpoint-components-vue.esm.js",

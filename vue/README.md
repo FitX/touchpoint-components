@@ -3,6 +3,10 @@ Vue Components Library for Gym Touchpoint
 
 ## Development
 ### Add new Component
+**Easy create new Component inclusive Documentation Boilerplate** via
+`npm run generate-component`
+
+Manuel:
 Create Component in lib-components with kebab-case.
 
 E.g. `app-button.vue`

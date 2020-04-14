@@ -1,0 +1,24 @@
+{
+  "name": "touchpoint-components",
+  "version": "1.0.0",
+  "description": "Component Library",
+  "main": "plopfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "plop": "^2.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-component": "plop"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FitX/touchpoint-components.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FitX/touchpoint-components/issues"
+  },
+  "homepage": "https://github.com/FitX/touchpoint-components#readme"
+}
