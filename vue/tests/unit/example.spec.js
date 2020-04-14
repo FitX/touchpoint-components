@@ -11,7 +11,7 @@ describe('RedirectTimer.vue', () => {
       propsData: {
         countdown,
         show: true,
-      }
+      },
     });
     expect(wrapper.vm.countdown).toBe(countdown);
     expect(wrapper.vm.time).toBe(countdown);
@@ -19,7 +19,8 @@ describe('RedirectTimer.vue', () => {
 
     jest.runTimersToTime(3000);
     Vue.nextTick(() => {
-      // you don't do your first reduction of the property until one second is elapsed, so after 3 seconds, timer will equal 8
+      // you don't do your first reduction of the property until one second is elapsed,
+      // so after 3 seconds, timer will equal 8
       // expect(RedirectTimer.data().time).toBe(8)
       expect(wrapper.vm.time).toBe(37);
       expect(wrapper.text()).toBe('37');
@@ -33,7 +34,7 @@ describe('RedirectTimer.vue', () => {
       propsData: {
         countdown,
         autoStart: false,
-      }
+      },
     });
     // Test defaults
     expect(wrapper.vm.countdown).toBe(countdown);
@@ -62,7 +63,7 @@ describe('RedirectTimer.vue', () => {
       propsData: {
         countdown,
         autoStart: true,
-      }
+      },
     });
     // Test defaults
     expect(wrapper.vm.countdown).toBe(countdown);
@@ -82,5 +83,4 @@ describe('RedirectTimer.vue', () => {
       });
     });
   });
-
 });

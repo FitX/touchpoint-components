@@ -1,6 +1,7 @@
 <template>
 <nav class="nav">
   <ul class="nav-list">
+    <li class="nav__item nav__item--no-link">v.{{ version }}</li>
     <li
       class="nav__item"
       v-if="backlink"><a @click="$router.push('/')">🏠 Übersicht</a></li>
@@ -38,6 +39,9 @@ export default {
       const components = require.context('@/sg/documentation/', false, /.vue$/);
       return components.keys().map((x) => components(x).default);
     },
+    version() {
+      return process.env.VERSION;
+    },
   },
   methods: {
     transformUrl(componentName) {
@@ -69,7 +73,7 @@ export default {
     padding: 1em;
     color: $color-ash;
 
-    &:hover {
+    &:not(&--no-link):hover {
       background: rgba($color-silver, 0.25);
       cursor: pointer;
     }

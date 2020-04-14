@@ -6,17 +6,12 @@
 //
 //
 //
-//
-//
-//
-//
-//
 var script = {
-  name: 'AnimationSatellite',
+  name: 'ButtonCallToAction',
   props: {
-    animation: {
-      type: Boolean,
-      default: false
+    modifier: {
+      type: String,
+      default: null
     }
   }
 };
@@ -160,12 +155,10 @@ var __vue_render__ = function () {
 
   var _c = _vm._self._c || _h;
 
-  return _c('div', {
-    staticClass: "satellite",
-    class: {
-      'animation': _vm.animation
-    }
-  }, [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span')]);
+  return _c('button', {
+    staticClass: "btn",
+    class: [_vm.modifier ? "btn--" + _vm.modifier : null]
+  }, [_vm._t("default")], 2);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -173,8 +166,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-6d475c4c_0", {
-    source: ".satellite[data-v-6d475c4c]{position:absolute;left:50%;top:50%;width:4em;height:4em;margin-left:-2em;margin-top:-2em;pointer-events:none}.satellite span[data-v-6d475c4c]{position:absolute;width:1em;height:1em;border-radius:50%;margin-top:-.5em;margin-left:-.5em;transition:all ease .5s;transform-origin:center 0;transform:translate(0,0) scale(0);animation-timing-function:cubic-bezier(.165,.84,.44,1);animation-duration:1.5s;animation-fill-mode:forwards}.satellite.animation span[data-v-6d475c4c]:nth-child(1){top:0;left:50%;background:#988ade;animation-name:satellite-top-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(2){top:25%;left:100%;background:#de8aa0;animation-name:satellite-top-right-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(3){top:75%;left:100%;background:#8aaede;animation-name:satellite-bottom-right-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(4){top:100%;left:50%;background:#8adead;animation-name:satellite-bottom-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(5){top:75%;left:0;background:#dec58a;animation-name:satellite-bottom-left-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(6){top:25%;left:0;background:#8ad1de;animation-name:satellite-top-left-data-v-6d475c4c}@keyframes satellite-top-left-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(-6.2611806798em,-3.1305903399em)}}@keyframes satellite-top-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(0,-7em)}}@keyframes satellite-top-right-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(6.2611806798em,-3.1305903399em)}}@keyframes satellite-bottom-right-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(6.2611806798em,3.1305903399em)}}@keyframes satellite-bottom-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(0,7em)}}@keyframes satellite-bottom-left-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(-6.2611806798em,3.1305903399em)}}",
+  inject("data-v-ecd38a10_0", {
+    source: ".btn[data-v-ecd38a10]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--inline[data-v-ecd38a10]{width:100%}.btn--small[data-v-ecd38a10]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}",
     map: undefined,
     media: undefined
   });
@@ -182,7 +175,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-6d475c4c";
+const __vue_scope_id__ = "data-v-ecd38a10";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
@@ -197,6 +190,78 @@ const __vue_component__ = normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
 }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, createInjector, undefined, undefined);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var script$1 = {
+  name: 'AnimationSatellite',
+  props: {
+    animation: {
+      type: Boolean,
+      default: false
+    }
+  }
+};
+
+/* script */
+const __vue_script__$1 = script$1;
+/* template */
+
+var __vue_render__$1 = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('div', {
+    staticClass: "satellite",
+    class: {
+      'animation': _vm.animation
+    }
+  }, [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span')]);
+};
+
+var __vue_staticRenderFns__$1 = [];
+/* style */
+
+const __vue_inject_styles__$1 = function (inject) {
+  if (!inject) return;
+  inject("data-v-6d475c4c_0", {
+    source: ".satellite[data-v-6d475c4c]{position:absolute;left:50%;top:50%;width:4em;height:4em;margin-left:-2em;margin-top:-2em;pointer-events:none}.satellite span[data-v-6d475c4c]{position:absolute;width:1em;height:1em;border-radius:50%;margin-top:-.5em;margin-left:-.5em;transition:all ease .5s;transform-origin:center 0;transform:translate(0,0) scale(0);animation-timing-function:cubic-bezier(.165,.84,.44,1);animation-duration:1.5s;animation-fill-mode:forwards}.satellite.animation span[data-v-6d475c4c]:nth-child(1){top:0;left:50%;background:#988ade;animation-name:satellite-top-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(2){top:25%;left:100%;background:#de8aa0;animation-name:satellite-top-right-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(3){top:75%;left:100%;background:#8aaede;animation-name:satellite-bottom-right-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(4){top:100%;left:50%;background:#8adead;animation-name:satellite-bottom-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(5){top:75%;left:0;background:#dec58a;animation-name:satellite-bottom-left-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(6){top:25%;left:0;background:#8ad1de;animation-name:satellite-top-left-data-v-6d475c4c}@keyframes satellite-top-left-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(-6.2611806798em,-3.1305903399em)}}@keyframes satellite-top-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(0,-7em)}}@keyframes satellite-top-right-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(6.2611806798em,-3.1305903399em)}}@keyframes satellite-bottom-right-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(6.2611806798em,3.1305903399em)}}@keyframes satellite-bottom-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(0,7em)}}@keyframes satellite-bottom-left-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(-6.2611806798em,3.1305903399em)}}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+const __vue_scope_id__$1 = "data-v-6d475c4c";
+/* module identifier */
+
+const __vue_module_identifier__$1 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$1 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$1 = normalizeComponent({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
 
 var IconVote1 = {
         functional: true,
@@ -252,10 +317,10 @@ var IconVote5 = {
 
 const filterEvenElement = (array = []) => array.filter((item, index) => index % 2 === 0);
 
-var script$1 = {
+var script$2 = {
   name: 'AppRating',
   components: {
-    AnimationSatellite: __vue_component__,
+    AnimationSatellite: __vue_component__$1,
     IconVote1,
     IconVote2,
     IconVote3,
@@ -383,10 +448,10 @@ var script$1 = {
 };
 
 /* script */
-const __vue_script__$1 = script$1;
+const __vue_script__$2 = script$2;
 /* template */
 
-var __vue_render__$1 = function () {
+var __vue_render__$2 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -431,10 +496,10 @@ var __vue_render__$1 = function () {
   }), 0) : _vm._e()]);
 };
 
-var __vue_staticRenderFns__$1 = [];
+var __vue_staticRenderFns__$2 = [];
 /* style */
 
-const __vue_inject_styles__$1 = function (inject) {
+const __vue_inject_styles__$2 = function (inject) {
   if (!inject) return;
   inject("data-v-49ecdc8f_0", {
     source: ".rating[data-v-49ecdc8f]{display:grid;grid-gap:1em;align-items:center;font-size:var(--voting-font-size)}@media (min-width:600px){.rating[data-v-49ecdc8f]{grid-template-columns:auto 1fr}}.rating--block[data-v-49ecdc8f]{grid-template-columns:1fr;grid-row-gap:0}.rating__buttons[data-v-49ecdc8f]{display:grid;grid-template-columns:repeat(var(--voting-icon-count),3.625rem);grid-gap:1em}.vote[data-v-49ecdc8f]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;position:relative;background:0 0;display:inline-block;outline:0}.vote.animation[data-v-49ecdc8f]{animation:icon-animation-data-v-49ecdc8f cubic-bezier(.165,.84,.44,1) 1.2s}.vote.animation[data-v-49ecdc8f],.vote[data-v-49ecdc8f]:focus{--vote-color:var(--color-green, #00BAA7)}.vote--1.animation[data-v-49ecdc8f],.vote--1[data-v-49ecdc8f]:focus{--vote-color:var(--color-cherry, #C33546)}.vote--2.animation[data-v-49ecdc8f],.vote--2[data-v-49ecdc8f]:focus,.vote--3.animation[data-v-49ecdc8f],.vote--3[data-v-49ecdc8f]:focus{--vote-color:var(--color-curry, #F5A323)}@keyframes icon-animation-data-v-49ecdc8f{0%{transform:scale(0)}100%{transform:scale(1)}}",
@@ -445,21 +510,21 @@ const __vue_inject_styles__$1 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$1 = "data-v-49ecdc8f";
+const __vue_scope_id__$2 = "data-v-49ecdc8f";
 /* module identifier */
 
-const __vue_module_identifier__$1 = undefined;
+const __vue_module_identifier__$2 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$1 = false;
+const __vue_is_functional_template__$2 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-const __vue_component__$1 = normalizeComponent({
-  render: __vue_render__$1,
-  staticRenderFns: __vue_staticRenderFns__$1
-}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
+const __vue_component__$2 = normalizeComponent({
+  render: __vue_render__$2,
+  staticRenderFns: __vue_staticRenderFns__$2
+}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, createInjector, undefined, undefined);
 
 var IconClose = {
         functional: true,
@@ -471,7 +536,7 @@ var IconClose = {
       };
 
 //
-var script$2 = {
+var script$3 = {
   name: 'AppOverlay',
   components: {
     IconClose
@@ -537,10 +602,10 @@ var script$2 = {
 };
 
 /* script */
-const __vue_script__$2 = script$2;
+const __vue_script__$3 = script$3;
 /* template */
 
-var __vue_render__$2 = function () {
+var __vue_render__$3 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -590,10 +655,10 @@ var __vue_render__$2 = function () {
   }, [_vm._t("default")], 2)])])]);
 };
 
-var __vue_staticRenderFns__$2 = [];
+var __vue_staticRenderFns__$3 = [];
 /* style */
 
-const __vue_inject_styles__$2 = function (inject) {
+const __vue_inject_styles__$3 = function (inject) {
   if (!inject) return;
   inject("data-v-36eb1c2e_0", {
     source: ".overlay-open{overflow:hidden}",
@@ -608,21 +673,21 @@ const __vue_inject_styles__$2 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$2 = "data-v-36eb1c2e";
+const __vue_scope_id__$3 = "data-v-36eb1c2e";
 /* module identifier */
 
-const __vue_module_identifier__$2 = undefined;
+const __vue_module_identifier__$3 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$2 = false;
+const __vue_is_functional_template__$3 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-const __vue_component__$2 = normalizeComponent({
-  render: __vue_render__$2,
-  staticRenderFns: __vue_staticRenderFns__$2
-}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, createInjector, undefined, undefined);
+const __vue_component__$3 = normalizeComponent({
+  render: __vue_render__$3,
+  staticRenderFns: __vue_staticRenderFns__$3
+}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, createInjector, undefined, undefined);
 
 //
 //
@@ -654,7 +719,7 @@ function removeListenerMulti(element, eventNames, listener) {
   });
 }
 
-var script$3 = {
+var script$4 = {
   name: 'RedirectTimer',
   props: {
     /**
@@ -791,10 +856,10 @@ var script$3 = {
 };
 
 /* script */
-const __vue_script__$3 = script$3;
+const __vue_script__$4 = script$4;
 /* template */
 
-var __vue_render__$3 = function () {
+var __vue_render__$4 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -804,38 +869,39 @@ var __vue_render__$3 = function () {
   return _c('div', [_vm._t("default"), _vm._v(" "), _vm.show ? [_vm._v("\n  " + _vm._s(_vm.time) + "\n  ")] : _vm._e()], 2);
 };
 
-var __vue_staticRenderFns__$3 = [];
+var __vue_staticRenderFns__$4 = [];
 /* style */
 
-const __vue_inject_styles__$3 = undefined;
+const __vue_inject_styles__$4 = undefined;
 /* scoped */
 
-const __vue_scope_id__$3 = undefined;
+const __vue_scope_id__$4 = undefined;
 /* module identifier */
 
-const __vue_module_identifier__$3 = undefined;
+const __vue_module_identifier__$4 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$3 = false;
+const __vue_is_functional_template__$4 = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-const __vue_component__$3 = normalizeComponent({
-  render: __vue_render__$3,
-  staticRenderFns: __vue_staticRenderFns__$3
-}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
+const __vue_component__$4 = normalizeComponent({
+  render: __vue_render__$4,
+  staticRenderFns: __vue_staticRenderFns__$4
+}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);
 
-
+// -- KEEP LINES FOR GENERATOR APPEND --
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  AnimationSatellite: __vue_component__,
-  AppRating: __vue_component__$1,
-  AppOverlay: __vue_component__$2,
-  RedirectTimer: __vue_component__$3
+  ButtonCallToAction: __vue_component__,
+  AnimationSatellite: __vue_component__$1,
+  AppRating: __vue_component__$2,
+  AppOverlay: __vue_component__$3,
+  RedirectTimer: __vue_component__$4
 });
 
 // Import vue components
@@ -869,4 +935,4 @@ if (GlobalVue) {
 } // Default export is library as a whole, registered via Vue.use()
 
 export default plugin;
-export { __vue_component__ as AnimationSatellite, __vue_component__$2 as AppOverlay, __vue_component__$1 as AppRating, __vue_component__$3 as RedirectTimer };
+export { __vue_component__$1 as AnimationSatellite, __vue_component__$3 as AppOverlay, __vue_component__$2 as AppRating, __vue_component__ as ButtonCallToAction, __vue_component__$4 as RedirectTimer };
