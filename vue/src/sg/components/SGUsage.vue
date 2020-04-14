@@ -12,7 +12,7 @@
       {{ isInverted ? 'zur Normalen Ansicht' : 'zur Invertierten Ansicht' }}
     </button>
   </header>
-  <p>{{ description }}</p>
+  <p v-if="description">{{ description }}</p>
   <div class="sg-usage__component">
     <slot></slot>
   </div>
@@ -67,15 +67,13 @@ export default {
     --color-text: #fff;
   }
 
-  padding: var(--spacing);
   margin-bottom: calc(4 * var(--spacing));
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
 
   &__header {
     display: grid;
     grid-template-columns: 1fr auto;
-    margin: calc(var(--spacing) * -1) calc(var(--spacing) * -1) 0;
-    padding-left: var(--spacing);
+    padding: calc(var(--spacing) / 2) var(--spacing);
     color: #fff;
 
     background:
@@ -103,6 +101,7 @@ export default {
   &__component {
     background: var(--color-background);
     color: var(--color-text);
+    padding: var(--spacing);
   }
 }
 </style>
