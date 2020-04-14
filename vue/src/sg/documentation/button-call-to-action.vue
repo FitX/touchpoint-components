@@ -16,7 +16,18 @@
     <s-g-usage
       headline="Full">
       <button-call-to-action
+        :additionalStyles="{ '--btn-color-bg': 'red' }"
         modifier="full">click mich</button-call-to-action>
+    </s-g-usage>
+
+    <s-g-usage
+      headline="Custom Styles">
+      <button-call-to-action
+        :additionalStyles="{
+        '--btn-color-bg': 'white',
+        '--btn-color-text': 'black',
+        '--btn-height': '2rem',
+      }">click mich</button-call-to-action>
     </s-g-usage>
   </div>
 </template>

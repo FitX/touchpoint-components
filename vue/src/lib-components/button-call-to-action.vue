@@ -1,7 +1,8 @@
 <template>
 <button
+  class="btn"
   :class="[ modifier ? `btn--${modifier}` : null ]"
-  class="btn">
+  :style="cssVars">
   <slot></slot>
 </button>
 </template>
@@ -17,6 +18,23 @@ export default {
         const acceptedValues = ['small', 'full'];
         return acceptedValues.includes(value);
       },
+    },
+    additionalStyles: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  data() {
+    return {
+      defaultStyles: {},
+    };
+  },
+  computed: {
+    cssVars() {
+      return {
+        ...this.defaultStyles,
+        ...this.additionalStyles,
+      };
     },
   },
 };
