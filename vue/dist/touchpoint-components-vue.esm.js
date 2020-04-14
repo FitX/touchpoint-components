@@ -11,7 +11,11 @@ var script = {
   props: {
     modifier: {
       type: String,
-      default: null
+      default: null,
+      validator: value => {
+        const acceptedValues = ['small', 'full'];
+        return acceptedValues.includes(value);
+      }
     }
   }
 };
@@ -166,8 +170,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-ecd38a10_0", {
-    source: ".btn[data-v-ecd38a10]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--inline[data-v-ecd38a10]{width:100%}.btn--small[data-v-ecd38a10]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}",
+  inject("data-v-68699ece_0", {
+    source: ".btn[data-v-68699ece]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-68699ece]{width:100%}.btn--small[data-v-68699ece]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}",
     map: undefined,
     media: undefined
   });
@@ -175,7 +179,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-ecd38a10";
+const __vue_scope_id__ = "data-v-68699ece";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

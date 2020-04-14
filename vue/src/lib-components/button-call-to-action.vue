@@ -13,6 +13,10 @@ export default {
     modifier: {
       type: String,
       default: null,
+      validator: (value) => {
+        const acceptedValues = ['small', 'full'];
+        return acceptedValues.includes(value);
+      },
     },
   },
 };
@@ -42,7 +46,7 @@ export default {
   width: var(--btn-width);
   border-radius: 0.625rem;
 
-  &--inline {
+  &--full {
     width: 100%;
   }
 

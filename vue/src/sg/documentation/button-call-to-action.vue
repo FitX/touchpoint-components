@@ -14,9 +14,9 @@
     </s-g-usage>
 
     <s-g-usage
-      headline="Inline">
+      headline="Full">
       <button-call-to-action
-        modifier="inline">click mich</button-call-to-action>
+        modifier="full">click mich</button-call-to-action>
     </s-g-usage>
   </div>
 </template>
