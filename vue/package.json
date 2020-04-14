@@ -1,6 +1,6 @@
 {
   "name": "touchpoint-components-vue",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "Vue Components for FitX Gym Touchpoints",
   "author": "FitX - Michael Gerstmann",
   "scripts": {

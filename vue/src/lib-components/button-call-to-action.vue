@@ -1,7 +1,7 @@
 <template>
 <button
   class="btn"
-  :class="[ modifier ? `btn--${modifier}` : null ]"
+  :class="modifierClasses"
   :style="cssVars">
   <slot></slot>
 </button>
@@ -12,11 +12,18 @@ export default {
   name: 'ButtonCallToAction',
   props: {
     modifier: {
-      type: String,
+      type: [String, Array],
       default: null,
       validator: (value) => {
-        const acceptedValues = ['small', 'full'];
-        return acceptedValues.includes(value);
+        const acceptedValues = ['small', 'full', 'special-case-1'];
+        if (typeof value === 'string') {
+          return acceptedValues.includes(value);
+        }
+        const checkArray = [];
+        value.forEach((item) => {
+          checkArray.push(acceptedValues.includes(item));
+        });
+        return checkArray.every((item) => item);
       },
     },
     additionalStyles: {
@@ -30,6 +37,15 @@ export default {
     };
   },
   computed: {
+    modifierClasses() {
+      if (this.modifier) {
+        const classArray = (typeof this.modifier === 'string')
+          ? new Array(this.modifier)
+          : [...this.modifier];
+        return classArray.map((modifier) => `btn--${modifier}`);
+      }
+      return null;
+    },
     cssVars() {
       return {
         ...this.defaultStyles,
@@ -72,6 +88,11 @@ export default {
     height: calc(var(--btn-height) * var(--btn-small-modifier-scale));
     max-width: calc(var(--btn-width) * var(--btn-small-modifier-scale));
     font-size: calc(var(--btn-font-size) * var(--btn-small-modifier-scale));
+  }
+
+  &--special-case-1 {
+    --btn-color-bg: var(--color-white, #{$color-white});
+    --btn-color-text: var(--color-black, #000);
   }
 }
 </style>

@@ -11,11 +11,20 @@ var script = {
   name: 'ButtonCallToAction',
   props: {
     modifier: {
-      type: String,
+      type: [String, Array],
       default: null,
       validator: value => {
-        const acceptedValues = ['small', 'full'];
-        return acceptedValues.includes(value);
+        const acceptedValues = ['small', 'full', 'special-case-1'];
+
+        if (typeof value === 'string') {
+          return acceptedValues.includes(value);
+        }
+
+        const checkArray = [];
+        value.forEach(item => {
+          checkArray.push(acceptedValues.includes(item));
+        });
+        return checkArray.every(item => item);
       }
     },
     additionalStyles: {
@@ -31,6 +40,15 @@ var script = {
   },
 
   computed: {
+    modifierClasses() {
+      if (this.modifier) {
+        const classArray = typeof this.modifier === 'string' ? new Array(this.modifier) : [...this.modifier];
+        return classArray.map(modifier => `btn--${modifier}`);
+      }
+
+      return null;
+    },
+
     cssVars() {
       return { ...this.defaultStyles,
         ...this.additionalStyles
@@ -181,7 +199,7 @@ var __vue_render__ = function () {
 
   return _c('button', {
     staticClass: "btn",
-    class: [_vm.modifier ? "btn--" + _vm.modifier : null],
+    class: _vm.modifierClasses,
     style: _vm.cssVars
   }, [_vm._t("default")], 2);
 };
@@ -191,8 +209,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-ad11b350_0", {
-    source: ".btn[data-v-ad11b350]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-ad11b350]{width:100%}.btn--small[data-v-ad11b350]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}",
+  inject("data-v-84afbf6c_0", {
+    source: ".btn[data-v-84afbf6c]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-84afbf6c]{width:100%}.btn--small[data-v-84afbf6c]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}.btn--special-case-1[data-v-84afbf6c]{--btn-color-bg:var(--color-white, #fff);--btn-color-text:var(--color-black, #000)}",
     map: undefined,
     media: undefined
   });
@@ -200,7 +218,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-ad11b350";
+const __vue_scope_id__ = "data-v-84afbf6c";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

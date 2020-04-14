@@ -16,8 +16,13 @@
     <s-g-usage
       headline="Full">
       <button-call-to-action
-        :additionalStyles="{ '--btn-color-bg': 'red' }"
         modifier="full">click mich</button-call-to-action>
+    </s-g-usage>
+
+    <s-g-usage
+      headline="Special Case 1 & Small">
+      <button-call-to-action
+        :modifier="['special-case-1', 'small']">click mich</button-call-to-action>
     </s-g-usage>
 
     <s-g-usage
