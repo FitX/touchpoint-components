@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve src/sg/main.js --port 8089",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "lint": "vue-cli-service lint",
-    "build-sg": "vue-cli-service build --modern --dest ./styleguide src/sg/serve-dev.js",
+    "build-sg": "vue-cli-service build --modern --dest ./styleguide src/sg/main.js",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",

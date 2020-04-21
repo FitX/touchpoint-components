@@ -1,28 +1,13 @@
 <template>
   <div>
     <h1>App Rating</h1>
-
     <s-g-usage
-      headline="Standard"
+      v-for="(example, index) in examples"
+      :key="index"
+      :headline="example.headline"
       :inverted="true">
-      <app-rating></app-rating>
-    </s-g-usage>
-
-    <s-g-usage
-      headline="Gut / Schlecht und modifier: Block"
-      :inverted="true">
-      <app-rating
-        description="Mit einer Beschreibung"
-        modifier="block"
-        :numberOfVotings="2"></app-rating>
-    </s-g-usage>
-
-    <s-g-usage
-      headline="3 Möglichkeiten mit Beschreibung"
-      :inverted="true">
-      <app-rating
-        description="Mit einer Beschreibung"
-        :numberOfVotings="3"></app-rating>
+      <component :is="example"></component>
+      <pre>{{ example.template }}</pre>
     </s-g-usage>
   </div>
 </template>
@@ -38,6 +23,35 @@ export default {
   components: {
     AppRating,
     SGUsage: () => import('@/sg/components/SGUsage.vue'),
+  },
+  computed: {
+    examples() {
+      const items = [
+        {
+          headline: 'Standard',
+          template: '<app-rating></app-rating>',
+        },
+        {
+          headline: 'Gut / Schlecht und modifier: Block',
+          template:
+`<app-rating
+  description="Mit einer Beschreibung"
+  modifier="block"
+  :numberOfVotings="2"></app-rating>`,
+        },
+        {
+          components: {
+            AppRating,
+          },
+          headline: '3 Möglichkeiten mit Beschreibung',
+          template:
+`<app-rating
+  description="Mit einer Beschreibung"
+  :numberOfVotings="3"></app-rating>`,
+        },
+      ];
+      return items.map((item) => ({ ...item, components: { AppRating } }));
+    },
   },
 };
 </script>

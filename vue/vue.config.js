@@ -1,6 +1,7 @@
 const PACKAGE_JSON = require('./package.json');
 
 module.exports = {
+  runtimeCompiler: true,
   chainWebpack: (config) => {
     config.plugin('define')
       .tap((args) => {
