@@ -5,9 +5,9 @@
       v-for="(example, index) in examples"
       :key="index"
       :headline="example.headline"
+      :code="example.template"
       :inverted="true">
       <component :is="example"></component>
-      <pre>{{ example.template }}</pre>
     </s-g-usage>
   </div>
 </template>
@@ -24,8 +24,14 @@ export default {
     AppRating,
     SGUsage: () => import('@/sg/components/SGUsage.vue'),
   },
+  data() {
+    return {
+      foo: 2,
+    };
+  },
   computed: {
     examples() {
+      const { foo } = this;
       const items = [
         {
           headline: 'Standard',
@@ -47,7 +53,7 @@ export default {
           template:
 `<app-rating
   description="Mit einer Beschreibung"
-  :numberOfVotings="3"></app-rating>`,
+  :numberOfVotings="${foo}"></app-rating>`,
         },
       ];
       return items.map((item) => ({ ...item, components: { AppRating } }));

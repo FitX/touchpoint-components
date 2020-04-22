@@ -5,6 +5,10 @@
     <li
       class="nav__item"
       v-if="backlink"><a @click="$router.push('/')">🏠 Übersicht</a></li>
+    <li
+      class="nav__item">
+      <router-link :to="{ name: 'detail-colors' }">🎨 Farben</router-link>
+    </li>
     <!-- <li
       class="nav__item"
       v-if="backlink"><a @click="$router.go(-1)">⬅️ zurück</a></li> -->

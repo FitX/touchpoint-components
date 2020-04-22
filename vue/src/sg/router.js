@@ -18,6 +18,11 @@ export const router = new Router({
       component: () => import(/* webpackChunkName: "sgHome" */ './views/detail.vue'),
     },
     {
+      path: '/colors',
+      name: 'detail-colors',
+      component: () => import(/* webpackChunkName: "sgHome" */ './views/detail-colors.vue'),
+    },
+    {
       path: '*',
       name: 'error',
       component: () => import(/* webpackChunkName: "sgHome" */ './views/detail.vue'),
