@@ -3,9 +3,7 @@
   :class="[{ 'sg-usage--inverted' : isInverted }]"
   class="sg-usage">
   <header class="sg-usage__header">
-    <h1 class="sg-usage__headline">
-      {{ componentName }}
-      <span v-if="headline">- {{ headline }}</span></h1>
+    <h1 class="sg-usage__headline">{{ headline }}</h1>
     <button
       class="sg-usage__toggle-inverted"
       @click="toggleInverted">
@@ -16,12 +14,27 @@
   <div class="sg-usage__component">
     <slot></slot>
   </div>
+  <codemirror
+    v-if="code"
+    :options="codeOptions"
+    :value="code"></codemirror>
 </section>
 </template>
 
 <script>
+import 'codemirror/mode/vue/vue';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/monokai.css';
+import 'codemirror/theme/tomorrow-night-eighties.css';
+import 'codemirror/theme/darcula.css';
+
 export default {
   name: 'SGUsage',
+  components: {
+    // codemirror: () => import('vue-codemirror'),
+    codemirror: () => import('vue-codemirror')
+      .then(({ codemirror }) => codemirror),
+  },
   props: {
     headline: {
       type: String,
@@ -35,15 +48,28 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  computed: {
-    componentName() {
-      return this.$slots?.default[0]?.componentOptions?.tag;
+    code: {
+      type: String,
+      default: null,
+    },
+    codeLanguage: {
+      type: String,
+      default: 'text/x-vue',
     },
   },
   data() {
     return {
       isInverted: this.inverted,
+      codeOptions: {
+        // codemirror options
+        tabSize: 2,
+        mode: this.codeLanguage,
+        theme1: 'tomorrow-night-eighties',
+        theme0: 'monokai',
+        theme: 'darcula',
+        lineNumbers: true,
+        line: true,
+      },
     };
   },
   methods: {
@@ -103,5 +129,21 @@ export default {
     color: var(--color-text);
     padding: var(--spacing);
   }
+}
+</style>
+
+<style lang="scss">
+/**
+@TODO prism.js as Alternative?
+ */
+.CodeMirror {
+  height: auto;
+}
+.cm-s-darcula {
+  &.cm-s-darcula span.cm-tag {
+     color: #E8BF6A; font-weight: normal; font-style: normal; text-decoration: none;
+   }
+  &.cm-s-darcula span.cm-attribute { color: #BABABA; } // #D0D0D0
+  &.cm-s-darcula span.cm-string { color: #9876AA; }
 }
 </style>

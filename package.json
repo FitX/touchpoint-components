@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Component Library",
   "main": "plopfile.js",
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "plop": "^2.6.0"
   },

@@ -28,6 +28,8 @@
   ],
   "dependencies": {
     "babel-jest": "^25.2.6",
+    "codemirror": "^5.53.2",
+    "vue-codemirror": "^4.0.6",
     "vue-router": "^3.1.6"
   },
   "devDependencies": {

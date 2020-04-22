@@ -1,3 +1,4 @@
+// eslint-disable linebreak-style
 // -- KEEP LINES FOR GENERATOR APPEND --
 export { default as ButtonCallToAction } from './button-call-to-action.vue';
 export { default as AnimationSatellite } from './animation-satellite.vue';
