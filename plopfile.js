@@ -17,6 +17,11 @@ module.exports = function (plop) {
       templateFile: 'templates/vue/sg-component.vue'
     },
     {
+      type: 'add',
+      path: 'vue/tests/unit/{{kebabCase componentName}}.spec.js',
+      templateFile: 'templates/vue/unit-test.js'
+    },
+    {
       type: 'modify',
       path: 'vue/src/lib-components/index.js',
       pattern: /(\/\/ -- KEEP LINES FOR GENERATOR APPEND --)/gi,
