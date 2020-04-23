@@ -1,10 +1,10 @@
 # touchpoint-components-vue
-Vue Components Library for Gym Touchpoint
+[Vue Components Library for Gym Touchpoint](https://touchpoint-components.netlify.app)
 
 ## Development
 ### Add new Component
 **Easy create new Component inclusive Documentation Boilerplate** via
-`npm run generate-component`
+`npm run generate-component` e.g. `npm run generate-component app-button`
 
 Manuel:
 Create Component in lib-components with kebab-case.
@@ -25,10 +25,14 @@ export { default as AppButton } from './app-button.vue';
 ```
 
 ### Serve Components
-Serve Components via `npm run serve`.
+- Serve Components via `npm run serve`.
+- Or build Components Library via `npm run build-sg`.
 
 ### Linting
-Lint Components via `npm run lint`.
+- Lint Components via `npm run lint`.
+
+### Testing
+- Cypress Unit Testing via `npm run test:unit`.
 
 ## Build
 1. Update `package.json`, via `npm version <update_type>`

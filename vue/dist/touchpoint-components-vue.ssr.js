@@ -957,7 +957,7 @@ var __vue_is_functional_template__$4 = false;
 var __vue_component__$4 = normalizeComponent({
   render: __vue_render__$4,
   staticRenderFns: __vue_staticRenderFns__$4
-}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);// -- KEEP LINES FOR GENERATOR APPEND --
+}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);// eslint-disable linebreak-style
 var components=/*#__PURE__*/Object.freeze({__proto__:null,ButtonCallToAction: __vue_component__,AnimationSatellite: __vue_component__$1,AppRating: __vue_component__$2,AppOverlay: __vue_component__$3,RedirectTimer: __vue_component__$4});var install = function installTouchpointComponentsVue(Vue) {
   if (install.installed) return;
   install.installed = true;
