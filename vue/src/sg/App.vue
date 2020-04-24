@@ -44,18 +44,24 @@ body {
   max-width: 100%;
 }
 
-pre {
+pre,
+.code-inline {
   --color-background: #000;
   --color-text: #fff;
   --spacing: 1rem;
+
+  background: var(--color-background);
+  color: var(--color-text);
+  padding: 0 var(--spacing);
+}
+
+pre {
   --negative-code-block: var(--layout-spacing);
 
   @media (min-width: 800px) {
     --negative-code-block: 0;
   }
 
-  background: var(--color-background);
-  color: var(--color-text);
   padding: var(--spacing);
   max-width: calc(100% + (2 * var(--negative-code-block)));
   overflow: auto;

@@ -55,7 +55,7 @@ export { default as AppButton } from './app-button.vue';
 - Cypress Unit Testing via `npm run test:unit`.
 
 ## Build
-1. Update `package.json`, via `npm version <update_type>`
+1. Update `package.json`, via `npm version [update_type]`
 2. Build via `npm run build`.
 3. Commit and Push Code
 4. Publish via `npm publish`.

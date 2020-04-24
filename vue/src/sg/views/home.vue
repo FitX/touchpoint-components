@@ -31,6 +31,13 @@ export default {
           return Prism.highlight(code, Prism.languages[lang], lang);
         },
       });
+      const renderer = {
+        codespan(code) {
+          const formatting = Prism.highlight(code, Prism.languages.clike, 'clike');
+          return `<code class="code-inline">${formatting}</code>`;
+        },
+      };
+      marked.use({ renderer });
       return DOMPurify.sanitize(marked(readme));
     },
   },
