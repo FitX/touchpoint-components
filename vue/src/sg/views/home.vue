@@ -27,13 +27,10 @@ export default {
       marked.setOptions({
         renderer: new marked.Renderer(),
         highlight: (code, language) => {
-          console.log('c', language);
           const lang = (language || 'clike').toLowerCase();
           return Prism.highlight(code, Prism.languages[lang], lang);
         },
       });
-      console.log(marked.lexer(readme));
-      console.log(DOMPurify.sanitize(marked(readme)));
       return DOMPurify.sanitize(marked(readme));
     },
   },
