@@ -14,26 +14,20 @@
   <div class="sg-usage__component">
     <slot></slot>
   </div>
-  <codemirror
-    v-if="code"
-    :options="codeOptions"
-    :value="code"></codemirror>
+  <prism>{{ code }}</prism>
 </section>
 </template>
 
 <script>
-import 'codemirror/mode/vue/vue';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/monokai.css';
-import 'codemirror/theme/tomorrow-night-eighties.css';
-import 'codemirror/theme/darcula.css';
+import Prism from 'vue-prism-component';
+import 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
 
 export default {
   name: 'SGUsage',
   components: {
     // codemirror: () => import('vue-codemirror'),
-    codemirror: () => import('vue-codemirror')
-      .then(({ codemirror }) => codemirror),
+    Prism,
   },
   props: {
     headline: {
