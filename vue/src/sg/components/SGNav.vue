@@ -12,14 +12,19 @@
     <!-- <li
       class="nav__item"
       v-if="backlink"><a @click="$router.go(-1)">⬅️ zurück</a></li> -->
-    <router-link
-      tag="li"
-      class="nav__item"
-      v-for="(nav, index) in navigation"
-      :key="index"
-      :to="{ name: 'detail', params: { component: transformUrl(nav.navName) } }" >
-      {{ nav.navName }}
-    </router-link>
+    <li class="nav__item nav__item--no-link">
+      Komponenten
+      <ul>
+        <router-link
+          tag="li"
+          class="nav__item"
+          v-for="(nav, index) in navigation"
+          :key="index"
+          :to="{ name: 'detail', params: { component: transformUrl(nav.navName) } }" >
+          {{ nav.navName }}
+        </router-link>
+      </ul>
+    </li>
   </ul>
 </nav>
 </template>
@@ -64,6 +69,8 @@ export default {
   --color-text: #000;
   --spacing: 1rem;
 
+  font-size: 0.75rem;
+
   &--inverted {
     --color-background: #000;
     --color-text: #fff;
@@ -80,6 +87,14 @@ export default {
     &:not(&--no-link):hover {
       background: rgba($color-silver, 0.25);
       cursor: pointer;
+    }
+  }
+
+  ul {
+    list-style: none;
+
+    ul {
+      padding-left: 0;
     }
   }
 }

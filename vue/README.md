@@ -12,19 +12,13 @@
 
 ## Development
 ### Add new Component
-**Easy create new Component inclusive Documentation Boilerplate** 
+Easy create new Component inclusive Documentation Boilerplate
 
-via
-```
-npm run generate-component
-```
+`npm run generate-component`
 
-e.g.
-```
-npm run generate-component app-button
-```
+e.g. `npm run generate-component app-button`
 
-<details>
+<details open>
 <summary>Manuel:</summary>
 Create Component in lib-components with kebab-case.
 
