@@ -14,7 +14,8 @@
   <div class="sg-usage__component">
     <slot></slot>
   </div>
-  <prism>{{ code }}</prism>
+  <prism class="sg-usage__code">{{ code }}</prism>
+  <code v-if="exampleOutput != null">Example Output: {{ exampleOutput }}</code>
 </section>
 </template>
 
@@ -49,6 +50,9 @@ export default {
     codeLanguage: {
       type: String,
       default: 'text/x-vue',
+    },
+    exampleOutput: {
+      default: null,
     },
   },
   data() {
@@ -106,6 +110,10 @@ export default {
 
     position: sticky;
     top: 0;
+  }
+
+  &__code {
+    margin: 0;
   }
 
   &__toggle-inverted {

@@ -7,6 +7,7 @@
       :key="index"
       :headline="example.headline"
       :code="example.template"
+      :example-output="example.model"
       :inverted="true">
       <component :is="example"></component>
     </s-g-usage>
@@ -18,6 +19,10 @@ import {
   {{pascalCase componentName}},
 } from '@/entry';
 
+const model = {
+  exampleData: true,
+};
+
 export default {
   name: 'Docu{{pascalCase componentName}}',
   navName: '{{pascalCase componentName}}',
@@ -26,17 +31,20 @@ export default {
     SGUsage: () => import('@/sg/components/SGUsage.vue'),
   },
   data() {
-    return {
-      exampleData: true,
-    };
+    return model;
   },
   computed: {
     examples() {
       // get Data from Vue Data
-      const { exampleData } = this;
+      const { exampleData } = model;
       const items = [
         {
           headline: 'Standard',
+          data() {
+            return model;
+          },
+          // display 2way bindings of data()
+          model: exampleData,
           template: `<{{kebabCase componentName}} :is-example="${exampleData}"></{{kebabCase componentName}}>`,
         },
       ];
