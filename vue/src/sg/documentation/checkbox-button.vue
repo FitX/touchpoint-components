@@ -40,7 +40,7 @@ import {
 const model = {
   boolean: false,
   string: null,
-  array: [],
+  array: ['val 2'],
   obj: null,
   obj1: { name: 'obj1' },
   obj2: { name: 'obj2' },
@@ -69,7 +69,7 @@ export default {
       } = model;
       const items = [
         {
-          headline: 'Standard',
+          headline: 'Ohne Funktion',
           template: '<checkbox-button>Checkbox</checkbox-button>',
         },
         {

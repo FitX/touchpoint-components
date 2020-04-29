@@ -3,7 +3,6 @@
   <input
     v-bind="attrs"
     @change="toggleCheck"
-    :indeterminate.prop="indeterminate"
     :checked="isSelected"
     type="checkbox">
   <span class="label"><slot>{{ label }}</slot></span>
@@ -25,7 +24,6 @@ export default {
     name: [String, Number],
     required: Boolean,
     disabled: Boolean,
-    indeterminate: Boolean,
     trueValue: {
       default: true,
     },
@@ -142,8 +140,5 @@ input {
 input:checked + .label{
   color: var(--checkbox-btn-color-text);
   background-color: var(--checkbox-btn-color-bg);
-}
-input:indeterminate + .label {
-  border-color: currentColor;
 }
 </style>
