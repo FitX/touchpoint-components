@@ -1,4 +1,20 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _defineProperty(obj, key, value) {
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -116,53 +132,105 @@ function _nonIterableRest() {
 //
 //
 //
+//
+//
 var script = {
-  name: 'ButtonCallToAction',
+  name: 'CheckboxButton',
   props: {
-    modifier: {
-      type: [String, Array],
-      default: null,
-      validator: function validator(value) {
-        var acceptedValues = ['small', 'full', 'special-case-1'];
-
-        if (typeof value === 'string') {
-          return acceptedValues.includes(value);
-        }
-
-        var checkArray = [];
-        value.forEach(function (item) {
-          checkArray.push(acceptedValues.includes(item));
-        });
-        return checkArray.every(function (item) {
-          return item;
-        });
-      }
+    model: [String, Boolean, Object, Number, Array],
+    value: {
+      type: [String, Boolean, Object, Number]
     },
-    additionalStyles: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
+    label: {
+      type: String,
+      default: null
+    },
+    name: [String, Number],
+    required: Boolean,
+    disabled: Boolean,
+    trueValue: {
+      default: true
+    },
+    falseValue: {
+      default: false
     }
   },
-  data: function data() {
-    return {
-      defaultStyles: {}
-    };
+  model: {
+    prop: 'model',
+    event: 'change'
   },
   computed: {
-    modifierClasses: function modifierClasses() {
-      if (this.modifier) {
-        var classArray = typeof this.modifier === 'string' ? new Array(this.modifier) : _toConsumableArray(this.modifier);
-        return classArray.map(function (modifier) {
-          return "btn--".concat(modifier);
-        });
+    attrs: function attrs() {
+      var attrs = {
+        id: this.id,
+        name: this.name,
+        disabled: this.disabled,
+        required: this.required,
+        'true-value': this.trueValue,
+        'false-value': this.falseValue
+      };
+
+      if (Object.hasOwnProperty.call(this.$options.propsData, 'value')) {
+        if (this.value === null || _typeof(this.value) !== 'object') {
+          attrs.value = this.value === null || this.value === undefined ? '' : String(this.value);
+        }
       }
 
-      return null;
+      return attrs;
     },
-    cssVars: function cssVars() {
-      return _objectSpread2({}, this.defaultStyles, {}, this.additionalStyles);
+    isSelected: function isSelected() {
+      if (this.isModelArray) {
+        return this.model.includes(this.value);
+      }
+
+      if (this.hasValue) {
+        return this.model === this.value;
+      }
+
+      return this.model === this.trueValue;
+    },
+    isModelArray: function isModelArray() {
+      return Array.isArray(this.model);
+    },
+    hasValue: function hasValue() {
+      return Object.hasOwnProperty.call(this.$options.propsData, 'value');
+    }
+  },
+  methods: {
+    removeItemFromModel: function removeItemFromModel(newModel) {
+      var index = newModel.indexOf(this.value);
+
+      if (index !== -1) {
+        newModel.splice(index, 1);
+      }
+    },
+    handleArrayCheckbox: function handleArrayCheckbox() {
+      var newModel = this.model;
+
+      if (!this.isSelected) {
+        newModel.push(this.value);
+      } else {
+        this.removeItemFromModel(newModel);
+      }
+
+      this.$emit('change', newModel);
+    },
+    handleSingleSelectCheckbox: function handleSingleSelectCheckbox() {
+      this.$emit('change', this.isSelected ? null : this.value);
+    },
+    handleSimpleCheckbox: function handleSimpleCheckbox() {
+      this.$emit('change', this.isSelected ? this.falseValue : this.trueValue);
+    },
+    toggleCheck: function toggleCheck() {
+      if (!this.disabled) {
+        if (this.isModelArray) {
+          this.handleArrayCheckbox();
+        } else if (this.hasValue) {
+          this.handleSingleSelectCheckbox();
+        } else {
+          this.handleSimpleCheckbox();
+        }
+      }
     }
   }
 };function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -289,11 +357,9 @@ var __vue_render__ = function __vue_render__() {
 
   var _c = _vm._self._c || _h;
 
-  return _c('button', {
-    staticClass: "btn",
-    class: _vm.modifierClasses,
-    style: _vm.cssVars
-  }, [_vm._t("default")], 2);
+  return _c('label', {
+    staticClass: "checkbox-button"
+  }, [_vm._ssrNode("<input type=\"checkbox\"" + _vm._ssrAttr("checked", _vm.isSelected) + _vm._ssrAttrs(_vm.attrs) + "> "), _vm._ssrNode("<span class=\"label\">", "</span>", [_vm._t("default", [_vm._v(_vm._s(_vm.label))])], 2)], 2);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -301,8 +367,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-84afbf6c_0", {
-    source: ".btn[data-v-84afbf6c]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-84afbf6c]{width:100%}.btn--small[data-v-84afbf6c]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}.btn--special-case-1[data-v-84afbf6c]{--btn-color-bg:var(--color-white, #fff);--btn-color-text:var(--color-black, #000)}",
+  inject("data-v-1bd35e70_0", {
+    source: ".checkbox-button[data-v-1bd35e70]{--checkbox-btn-color-border:var(--color-ash, #555);--checkbox-btn-color-bg:var(--color-chalk, #efefef);--checkbox-btn-color-text:var(--color-black, #000);cursor:pointer;user-select:none;display:inline-block;margin-right:var(--spacing-normal,20px)}.label[data-v-1bd35e70]{display:inline-block;border:1px solid var(--checkbox-btn-color-border);padding:8px 32px;border-radius:1em;font-size:var(--font-size-large)}input[data-v-1bd35e70]{display:none}input:checked+.label[data-v-1bd35e70]{color:var(--checkbox-btn-color-text);background-color:var(--checkbox-btn-color-bg)}",
     map: undefined,
     media: undefined
   });
@@ -310,10 +376,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-84afbf6c";
+var __vue_scope_id__ = "data-v-1bd35e70";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-84afbf6c";
+var __vue_module_identifier__ = "data-v-1bd35e70";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
@@ -331,11 +397,113 @@ var __vue_component__ = normalizeComponent({
 //
 //
 //
-//
-//
-//
-//
 var script$1 = {
+  name: 'ButtonCallToAction',
+  props: {
+    modifier: {
+      type: [String, Array],
+      default: null,
+      validator: function validator(value) {
+        var acceptedValues = ['small', 'full', 'special-case-1'];
+
+        if (typeof value === 'string') {
+          return acceptedValues.includes(value);
+        }
+
+        var checkArray = [];
+        value.forEach(function (item) {
+          checkArray.push(acceptedValues.includes(item));
+        });
+        return checkArray.every(function (item) {
+          return item;
+        });
+      }
+    },
+    additionalStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  data: function data() {
+    return {
+      defaultStyles: {}
+    };
+  },
+  computed: {
+    modifierClasses: function modifierClasses() {
+      if (this.modifier) {
+        var classArray = typeof this.modifier === 'string' ? new Array(this.modifier) : _toConsumableArray(this.modifier);
+        return classArray.map(function (modifier) {
+          return "btn--".concat(modifier);
+        });
+      }
+
+      return null;
+    },
+    cssVars: function cssVars() {
+      return _objectSpread2({}, this.defaultStyles, {}, this.additionalStyles);
+    }
+  }
+};/* script */
+var __vue_script__$1 = script$1;
+/* template */
+
+var __vue_render__$1 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('button', {
+    staticClass: "btn",
+    class: _vm.modifierClasses,
+    style: _vm.cssVars
+  }, [_vm._t("default")], 2);
+};
+
+var __vue_staticRenderFns__$1 = [];
+/* style */
+
+var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-84afbf6c_0", {
+    source: ".btn[data-v-84afbf6c]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-84afbf6c]{width:100%}.btn--small[data-v-84afbf6c]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}.btn--special-case-1[data-v-84afbf6c]{--btn-color-bg:var(--color-white, #fff);--btn-color-text:var(--color-black, #000)}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$1 = "data-v-84afbf6c";
+/* module identifier */
+
+var __vue_module_identifier__$1 = "data-v-84afbf6c";
+/* functional template */
+
+var __vue_is_functional_template__$1 = false;
+/* style inject shadow dom */
+
+var __vue_component__$1 = normalizeComponent({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, createInjectorSSR, undefined);//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var script$2 = {
   name: 'AnimationSatellite',
   props: {
     animation: {
@@ -344,10 +512,10 @@ var script$1 = {
     }
   }
 };/* script */
-var __vue_script__$1 = script$1;
+var __vue_script__$2 = script$2;
 /* template */
 
-var __vue_render__$1 = function __vue_render__() {
+var __vue_render__$2 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -362,10 +530,10 @@ var __vue_render__$1 = function __vue_render__() {
   }, [_vm._ssrNode("<span></span> <span></span> <span></span> <span></span> <span></span> <span></span>")]);
 };
 
-var __vue_staticRenderFns__$1 = [];
+var __vue_staticRenderFns__$2 = [];
 /* style */
 
-var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-6d475c4c_0", {
     source: ".satellite[data-v-6d475c4c]{position:absolute;left:50%;top:50%;width:4em;height:4em;margin-left:-2em;margin-top:-2em;pointer-events:none}.satellite span[data-v-6d475c4c]{position:absolute;width:1em;height:1em;border-radius:50%;margin-top:-.5em;margin-left:-.5em;transition:all ease .5s;transform-origin:center 0;transform:translate(0,0) scale(0);animation-timing-function:cubic-bezier(.165,.84,.44,1);animation-duration:1.5s;animation-fill-mode:forwards}.satellite.animation span[data-v-6d475c4c]:nth-child(1){top:0;left:50%;background:#988ade;animation-name:satellite-top-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(2){top:25%;left:100%;background:#de8aa0;animation-name:satellite-top-right-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(3){top:75%;left:100%;background:#8aaede;animation-name:satellite-bottom-right-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(4){top:100%;left:50%;background:#8adead;animation-name:satellite-bottom-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(5){top:75%;left:0;background:#dec58a;animation-name:satellite-bottom-left-data-v-6d475c4c}.satellite.animation span[data-v-6d475c4c]:nth-child(6){top:25%;left:0;background:#8ad1de;animation-name:satellite-top-left-data-v-6d475c4c}@keyframes satellite-top-left-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(-6.2611806798em,-3.1305903399em)}}@keyframes satellite-top-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(0,-7em)}}@keyframes satellite-top-right-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(6.2611806798em,-3.1305903399em)}}@keyframes satellite-bottom-right-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(6.2611806798em,3.1305903399em)}}@keyframes satellite-bottom-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(0,7em)}}@keyframes satellite-bottom-left-data-v-6d475c4c{0%{transform:scale(1) translate(0,0)}100%{transform:scale(0) translate(-6.2611806798em,3.1305903399em)}}",
@@ -376,19 +544,19 @@ var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$1 = "data-v-6d475c4c";
+var __vue_scope_id__$2 = "data-v-6d475c4c";
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-6d475c4c";
+var __vue_module_identifier__$2 = "data-v-6d475c4c";
 /* functional template */
 
-var __vue_is_functional_template__$1 = false;
+var __vue_is_functional_template__$2 = false;
 /* style inject shadow dom */
 
-var __vue_component__$1 = normalizeComponent({
-  render: __vue_render__$1,
-  staticRenderFns: __vue_staticRenderFns__$1
-}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, createInjectorSSR, undefined);var IconVote1 = {
+var __vue_component__$2 = normalizeComponent({
+  render: __vue_render__$2,
+  staticRenderFns: __vue_staticRenderFns__$2
+}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, createInjectorSSR, undefined);var IconVote1 = {
         functional: true,
         render: 
       function render(_h, _vm) {
@@ -436,10 +604,10 @@ var filterEvenElement = function filterEvenElement() {
   });
 };
 
-var script$2 = {
+var script$3 = {
   name: 'AppRating',
   components: {
-    AnimationSatellite: __vue_component__$1,
+    AnimationSatellite: __vue_component__$2,
     IconVote1: IconVote1,
     IconVote2: IconVote2,
     IconVote3: IconVote3,
@@ -558,10 +726,10 @@ var script$2 = {
     }
   }
 };/* script */
-var __vue_script__$2 = script$2;
+var __vue_script__$3 = script$3;
 /* template */
 
-var __vue_render__$2 = function __vue_render__() {
+var __vue_render__$3 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -588,10 +756,10 @@ var __vue_render__$2 = function __vue_render__() {
   }), 0) : _vm._e()], 2);
 };
 
-var __vue_staticRenderFns__$2 = [];
+var __vue_staticRenderFns__$3 = [];
 /* style */
 
-var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-49ecdc8f_0", {
     source: ".rating[data-v-49ecdc8f]{display:grid;grid-gap:1em;align-items:center;font-size:var(--voting-font-size)}@media (min-width:600px){.rating[data-v-49ecdc8f]{grid-template-columns:auto 1fr}}.rating--block[data-v-49ecdc8f]{grid-template-columns:1fr;grid-row-gap:0}.rating__buttons[data-v-49ecdc8f]{display:grid;grid-template-columns:repeat(var(--voting-icon-count),3.625rem);grid-gap:1em}.vote[data-v-49ecdc8f]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;position:relative;background:0 0;display:inline-block;outline:0}.vote.animation[data-v-49ecdc8f]{animation:icon-animation-data-v-49ecdc8f cubic-bezier(.165,.84,.44,1) 1.2s}.vote.animation[data-v-49ecdc8f],.vote[data-v-49ecdc8f]:focus{--vote-color:var(--color-green, #00BAA7)}.vote--1.animation[data-v-49ecdc8f],.vote--1[data-v-49ecdc8f]:focus{--vote-color:var(--color-cherry, #C33546)}.vote--2.animation[data-v-49ecdc8f],.vote--2[data-v-49ecdc8f]:focus,.vote--3.animation[data-v-49ecdc8f],.vote--3[data-v-49ecdc8f]:focus{--vote-color:var(--color-curry, #F5A323)}@keyframes icon-animation-data-v-49ecdc8f{0%{transform:scale(0)}100%{transform:scale(1)}}",
@@ -602,26 +770,26 @@ var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$2 = "data-v-49ecdc8f";
+var __vue_scope_id__$3 = "data-v-49ecdc8f";
 /* module identifier */
 
-var __vue_module_identifier__$2 = "data-v-49ecdc8f";
+var __vue_module_identifier__$3 = "data-v-49ecdc8f";
 /* functional template */
 
-var __vue_is_functional_template__$2 = false;
+var __vue_is_functional_template__$3 = false;
 /* style inject shadow dom */
 
-var __vue_component__$2 = normalizeComponent({
-  render: __vue_render__$2,
-  staticRenderFns: __vue_staticRenderFns__$2
-}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, createInjectorSSR, undefined);var IconClose = {
+var __vue_component__$3 = normalizeComponent({
+  render: __vue_render__$3,
+  staticRenderFns: __vue_staticRenderFns__$3
+}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, createInjectorSSR, undefined);var IconClose = {
         functional: true,
         render: 
       function render(_h, _vm) {
         var _c=_vm._c;return _c('svg',{class:[_vm.data.class, _vm.data.staticClass],style:([_vm.data.style, _vm.data.staticStyle]),attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 48 48"}},[_c('path',{attrs:{"d":"M43.644.785L24 20.43 4.356.785a2.525 2.525 0 10-3.57 3.571L20.428 24 .785 43.644a2.525 2.525 0 003.571 3.57L24 27.572l19.644 19.644a2.525 2.525 0 103.57-3.571L27.572 24 47.215 4.356a2.525 2.525 0 00-3.571-3.57z","fill":"#FFF","fill-rule":"evenodd"}})])
       }
     
-      };var script$3 = {
+      };var script$4 = {
   name: 'AppOverlay',
   components: {
     IconClose: IconClose
@@ -679,10 +847,10 @@ var __vue_component__$2 = normalizeComponent({
     }
   }
 };/* script */
-var __vue_script__$3 = script$3;
+var __vue_script__$4 = script$4;
 /* template */
 
-var __vue_render__$3 = function __vue_render__() {
+var __vue_render__$4 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -732,10 +900,10 @@ var __vue_render__$3 = function __vue_render__() {
   }, [_vm._t("default")], 2)])])]);
 };
 
-var __vue_staticRenderFns__$3 = [];
+var __vue_staticRenderFns__$4 = [];
 /* style */
 
-var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$4 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-36eb1c2e_0", {
     source: ".overlay-open{overflow:hidden}",
@@ -750,19 +918,19 @@ var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$3 = "data-v-36eb1c2e";
+var __vue_scope_id__$4 = "data-v-36eb1c2e";
 /* module identifier */
 
-var __vue_module_identifier__$3 = "data-v-36eb1c2e";
+var __vue_module_identifier__$4 = "data-v-36eb1c2e";
 /* functional template */
 
-var __vue_is_functional_template__$3 = false;
+var __vue_is_functional_template__$4 = false;
 /* style inject shadow dom */
 
-var __vue_component__$3 = normalizeComponent({
-  render: __vue_render__$3,
-  staticRenderFns: __vue_staticRenderFns__$3
-}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, createInjectorSSR, undefined);//
+var __vue_component__$4 = normalizeComponent({
+  render: __vue_render__$4,
+  staticRenderFns: __vue_staticRenderFns__$4
+}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, createInjectorSSR, undefined);//
 //
 //
 //
@@ -792,7 +960,7 @@ function removeListenerMulti(element, eventNames, listener) {
   });
 }
 
-var script$4 = {
+var script$5 = {
   name: 'RedirectTimer',
   props: {
     /**
@@ -922,10 +1090,10 @@ var script$4 = {
     }
   }
 };/* script */
-var __vue_script__$4 = script$4;
+var __vue_script__$5 = script$5;
 /* template */
 
-var __vue_render__$4 = function __vue_render__() {
+var __vue_render__$5 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -935,30 +1103,30 @@ var __vue_render__$4 = function __vue_render__() {
   return _c('div', [_vm._t("default"), _vm._ssrNode(" " + (_vm.show ? _vm._ssrEscape("\n  " + _vm._s(_vm.time) + "\n  ") : "<!---->"))], 2);
 };
 
-var __vue_staticRenderFns__$4 = [];
+var __vue_staticRenderFns__$5 = [];
 /* style */
 
-var __vue_inject_styles__$4 = undefined;
+var __vue_inject_styles__$5 = undefined;
 /* scoped */
 
-var __vue_scope_id__$4 = undefined;
+var __vue_scope_id__$5 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$4 = "data-v-03e0b524";
+var __vue_module_identifier__$5 = "data-v-03e0b524";
 /* functional template */
 
-var __vue_is_functional_template__$4 = false;
+var __vue_is_functional_template__$5 = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$4 = normalizeComponent({
-  render: __vue_render__$4,
-  staticRenderFns: __vue_staticRenderFns__$4
-}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);// eslint-disable linebreak-style
-var components=/*#__PURE__*/Object.freeze({__proto__:null,ButtonCallToAction: __vue_component__,AnimationSatellite: __vue_component__$1,AppRating: __vue_component__$2,AppOverlay: __vue_component__$3,RedirectTimer: __vue_component__$4});var install = function installTouchpointComponentsVue(Vue) {
+var __vue_component__$5 = normalizeComponent({
+  render: __vue_render__$5,
+  staticRenderFns: __vue_staticRenderFns__$5
+}, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, undefined, undefined, undefined);// eslint-disable linebreak-style
+var components=/*#__PURE__*/Object.freeze({__proto__:null,CheckboxButton: __vue_component__,ButtonCallToAction: __vue_component__$1,AnimationSatellite: __vue_component__$2,AppRating: __vue_component__$3,AppOverlay: __vue_component__$4,RedirectTimer: __vue_component__$5});var install = function installTouchpointComponentsVue(Vue) {
   if (install.installed) return;
   install.installed = true;
   Object.entries(components).forEach(function (_ref) {
@@ -989,4 +1157,4 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
   GlobalVue.use(plugin);
 } // Default export is library as a whole, registered via Vue.use()
-exports.AnimationSatellite=__vue_component__$1;exports.AppOverlay=__vue_component__$3;exports.AppRating=__vue_component__$2;exports.ButtonCallToAction=__vue_component__;exports.RedirectTimer=__vue_component__$4;exports.default=plugin;
+exports.AnimationSatellite=__vue_component__$2;exports.AppOverlay=__vue_component__$4;exports.AppRating=__vue_component__$3;exports.ButtonCallToAction=__vue_component__$1;exports.CheckboxButton=__vue_component__;exports.RedirectTimer=__vue_component__$5;exports.default=plugin;
