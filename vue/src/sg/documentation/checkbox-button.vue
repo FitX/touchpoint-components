@@ -12,23 +12,6 @@
       <component
         :is="example"></component>
     </s-g-usage>
-
-    <table>
-      <tr>
-        <th>Array</th>
-        <th>Boolean</th>
-        <th>String</th>
-        <th>No Value</th>
-        <th>Object</th>
-      </tr>
-
-      <tr>
-        <td>{{ array }}</td>
-        <td>{{ boolean }}</td>
-        <td>{{ string }}</td>
-        <td>{{ obj }}</td>
-      </tr>
-    </table>
   </div>
 </template>
 
@@ -59,6 +42,7 @@ export default {
   computed: {
     examples() {
       // get Data from Vue Data
+      /* eslint-disable no-unused-vars */
       const {
         boolean,
         string,

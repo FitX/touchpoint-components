@@ -121,18 +121,18 @@ export default {
   --checkbox-btn-color-border: var(--color-ash, #{$color-ash});
   --checkbox-btn-color-bg: var(--color-chalk, #{$color-chalk});
   --checkbox-btn-color-text: var(--color-black, #{$color-black});
+  --checkbox-font-size: var(--checkbox-font-size, 1.25rem); // 20px
 
   cursor: pointer;
   user-select: none;
   display: inline-block;
-  margin-right: var(--spacing-normal, 20px);
 }
 .label {
   display: inline-block;
   border: 1px solid var(--checkbox-btn-color-border);
-  padding: 8px 32px;
+  padding: 0.4em 1.6em; // 8px 32px
   border-radius: 1em;
-  font-size: var(--font-size-large);
+  font-size: var(--checkbox-font-size);
 }
 input {
   display: none;

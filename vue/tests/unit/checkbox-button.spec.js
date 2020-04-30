@@ -12,7 +12,7 @@ describe('Example Test for Checkbox button', () => {
       data() {
         return {
           model: 'string example',
-        }
+        };
       },
       template: `
         <div>
@@ -27,15 +27,11 @@ describe('Example Test for Checkbox button', () => {
   });
 
   it('should toggle a value from model when model is an array', () => {
-    const expectDefault = () => {
-      expect(wrapper.vm.$children[0].isSelected).toBe(false);
-      expect(wrapper.vm.$data.model).toEqual([1]);
-    };
     const wrapper = mount({
       data() {
         return {
           model: [1],
-        }
+        };
       },
       template: `
         <div>
@@ -46,11 +42,15 @@ describe('Example Test for Checkbox button', () => {
         CheckboxButton,
       },
     });
+    const expectDefault = () => {
+      expect(wrapper.vm.$children[0].isSelected).toBe(false);
+      expect(wrapper.vm.$data.model).toEqual([1]);
+    };
     expectDefault();
     wrapper.find(CheckboxButton).trigger('click');
     expect(wrapper.vm.$children[0].isSelected).toBe(true);
     expect(wrapper.vm.$data.model).toEqual([1, 2]);
     wrapper.find(CheckboxButton).trigger('click');
-    expectDefault()
+    expectDefault();
   });
 });

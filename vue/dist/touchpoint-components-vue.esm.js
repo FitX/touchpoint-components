@@ -280,8 +280,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-1bd35e70_0", {
-    source: ".checkbox-button[data-v-1bd35e70]{--checkbox-btn-color-border:var(--color-ash, #555);--checkbox-btn-color-bg:var(--color-chalk, #efefef);--checkbox-btn-color-text:var(--color-black, #000);cursor:pointer;user-select:none;display:inline-block;margin-right:var(--spacing-normal,20px)}.label[data-v-1bd35e70]{display:inline-block;border:1px solid var(--checkbox-btn-color-border);padding:8px 32px;border-radius:1em;font-size:var(--font-size-large)}input[data-v-1bd35e70]{display:none}input:checked+.label[data-v-1bd35e70]{color:var(--checkbox-btn-color-text);background-color:var(--checkbox-btn-color-bg)}",
+  inject("data-v-328b67a2_0", {
+    source: ".checkbox-button[data-v-328b67a2]{--checkbox-btn-color-border:var(--color-ash, #555);--checkbox-btn-color-bg:var(--color-chalk, #efefef);--checkbox-btn-color-text:var(--color-black, #000);--checkbox-font-size:var(--checkbox-font-size, 1.25rem);cursor:pointer;user-select:none;display:inline-block}.label[data-v-328b67a2]{display:inline-block;border:1px solid var(--checkbox-btn-color-border);padding:.4em 1.6em;border-radius:1em;font-size:var(--checkbox-font-size)}input[data-v-328b67a2]{display:none}input:checked+.label[data-v-328b67a2]{color:var(--checkbox-btn-color-text);background-color:var(--checkbox-btn-color-bg)}",
     map: undefined,
     media: undefined
   });
@@ -289,7 +289,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-1bd35e70";
+const __vue_scope_id__ = "data-v-328b67a2";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
