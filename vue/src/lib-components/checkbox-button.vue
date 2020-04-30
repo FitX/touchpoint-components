@@ -121,7 +121,6 @@ export default {
   --checkbox-btn-color-border: var(--color-ash, #{$color-ash});
   --checkbox-btn-color-bg: var(--color-chalk, #{$color-chalk});
   --checkbox-btn-color-text: var(--color-black, #{$color-black});
-  --checkbox-font-size: var(--checkbox-font-size, 1.25rem); // 20px
 
   cursor: pointer;
   user-select: none;
@@ -132,7 +131,7 @@ export default {
   border: 1px solid var(--checkbox-btn-color-border);
   padding: 0.4em 1.6em; // 8px 32px
   border-radius: 1em;
-  font-size: var(--checkbox-font-size);
+  font-size: var(--checkbox-font-size, 1.25rem); // 20px;
 }
 input {
   display: none;
