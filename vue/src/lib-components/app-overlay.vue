@@ -128,6 +128,7 @@ export default {
   left: 0;
   background: rgba(0,0,0,0.9);
   z-index: 100;
+  color: var(--overlay-color-text);
 
   &--full {
     align-items: start;
@@ -162,7 +163,6 @@ export default {
     background: none;
     border: 0;
     appearance: none;
-    color: var(--overlay-color-text);
     align-self: start;
     margin-bottom: 2em;
   }
