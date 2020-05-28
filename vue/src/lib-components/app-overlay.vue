@@ -3,6 +3,7 @@
   <div
     v-show="showOverlay"
     :style="cssVars"
+    :class="{ 'overlay--full': isFull }"
     class="overlay">
     <div
       role="dialog"
@@ -50,17 +51,24 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    isFull: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       showOverlay: this.isVisible,
       defaultStyles: {
         '--overlay-color-text': '#fff',
-        '--overlay-color-background': '#1a1a1a',
+        '--overlay-color-background': this.isFull ? 'transparen' : '#1a1a1a',
         '--overlay-headline-size': '4rem',
         '--overlay-close-size': '50px',
         '--overlay-border-radius': '1em',
         '--overlay-padding': '1em',
+        '--overlay-width': this.isFull ? '100%' : '90vw',
+        '--overlay-max-width': this.isFull ? 'none' : '1930px',
+        '--overlay-content-height': this.isFull ? '1fr' : 'auto',
       },
     };
   },
@@ -121,14 +129,18 @@ export default {
   background: rgba(0,0,0,0.9);
   z-index: 100;
 
+  &--full {
+    align-items: start;
+  }
+
   &__inner {
-    width: 90vw;
-    max-width: 1930px;
+    width: var(--overlay-width);
+    max-width: var(--overlay-max-width);
     display: grid;
     grid:
       '. close' auto
       'headline headline' auto
-      'content content' auto
+      'content content' var(--overlay-content-height)
         / 1fr auto;
     background: var(--overlay-color-background);
     border-radius: var(--overlay-border-radius);
