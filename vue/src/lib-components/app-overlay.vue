@@ -143,6 +143,8 @@ export default {
       'headline headline' auto
       'content content' var(--overlay-content-height)
         / 1fr auto;
+    max-height: 100vh;
+    overflow: auto;
     background: var(--overlay-color-background);
     border-radius: var(--overlay-border-radius);
     padding: var(--overlay-padding);
