@@ -68,20 +68,25 @@ export default {
   --btn-color-text: var(--color-white, #{$color-white});
   --btn-font-size: var(--font-size-normal);
   --btn-height: 5rem;
-  --btn-width: 28.125rem;
+  --btn-width: 100%;
   --btn-small-modifier-scale: 0.78;
+
+  @media (min-width: 28.125rem) {
+    --btn-width: 28.125rem;
+  }
 
   font-size: var(--btn-font-size);
   display: inline-block;
   background: var(--btn-color-bg);
   color: var(--btn-color-text);
   height: var(--btn-height);
-  max-width: 100%;
+  max-width: var(--btn-width);
   width: var(--btn-width);
   border-radius: 0.625rem;
+  padding: 0 1em;
 
   &--full {
-    width: 100%;
+    --btn-width: 100%;
   }
 
   &--small {

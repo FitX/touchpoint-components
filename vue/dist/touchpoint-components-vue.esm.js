@@ -388,8 +388,8 @@ var __vue_staticRenderFns__$1 = [];
 
 const __vue_inject_styles__$1 = function (inject) {
   if (!inject) return;
-  inject("data-v-84afbf6c_0", {
-    source: ".btn[data-v-84afbf6c]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:28.125rem;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:100%;width:var(--btn-width);border-radius:.625rem}.btn--full[data-v-84afbf6c]{width:100%}.btn--small[data-v-84afbf6c]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}.btn--special-case-1[data-v-84afbf6c]{--btn-color-bg:var(--color-white, #fff);--btn-color-text:var(--color-black, #000)}",
+  inject("data-v-5c290dc5_0", {
+    source: ".btn[data-v-5c290dc5]{border:none;font-family:inherit;font-size:100%;line-height:1.15;margin:0;overflow:visible;text-transform:none;-webkit-appearance:button;--btn-color-bg:var(--color-orange, #ED6A12);--btn-color-text:var(--color-white, #fff);--btn-font-size:var(--font-size-normal);--btn-height:5rem;--btn-width:100%;--btn-small-modifier-scale:0.78;font-size:var(--btn-font-size);display:inline-block;background:var(--btn-color-bg);color:var(--btn-color-text);height:var(--btn-height);max-width:var(--btn-width);width:var(--btn-width);border-radius:.625rem;padding:0 1em}@media (min-width:28.125rem){.btn[data-v-5c290dc5]{--btn-width:28.125rem}}.btn--full[data-v-5c290dc5]{--btn-width:100%}.btn--small[data-v-5c290dc5]{height:calc(var(--btn-height) * var(--btn-small-modifier-scale));max-width:calc(var(--btn-width) * var(--btn-small-modifier-scale));font-size:calc(var(--btn-font-size) * var(--btn-small-modifier-scale))}.btn--special-case-1[data-v-5c290dc5]{--btn-color-bg:var(--color-white, #fff);--btn-color-text:var(--color-black, #000)}",
     map: undefined,
     media: undefined
   });
@@ -397,7 +397,7 @@ const __vue_inject_styles__$1 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$1 = "data-v-84afbf6c";
+const __vue_scope_id__$1 = "data-v-5c290dc5";
 /* module identifier */
 
 const __vue_module_identifier__$1 = undefined;
